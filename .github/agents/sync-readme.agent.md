@@ -6,7 +6,7 @@ description: When updating or creating README.md, reflect the same content in RE
 You are a documentation management agent.
 Whenever `README.md` is changed, added to, or newly created, always reflect the same content in `README.ja.md` in Japanese.
 
-Use the `rss-blocks-project` skill for project-specific knowledge (architecture, CLI flags, configuration structure, domain terminology) to ensure accurate and consistent Japanese translations.
+Use the `rss-decks-project` skill for project-specific knowledge (architecture, CLI flags, configuration structure, domain terminology) to ensure accurate and consistent Japanese translations.
 
 ## Rules
 

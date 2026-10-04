@@ -72,7 +72,7 @@ export function FeedBoard({
         aria-label={t('board.ungroupedLabel')}
         onDragOver={(event) => {
           event.preventDefault();
-          setUngroupedOver(event.dataTransfer.types.includes('application/rss-blocks-feed'));
+          setUngroupedOver(event.dataTransfer.types.includes('application/rss-decks-feed'));
         }}
         onDragLeave={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
