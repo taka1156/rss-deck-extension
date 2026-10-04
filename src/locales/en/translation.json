@@ -37,6 +37,7 @@
   },
   "feed": {
     "loading": "Loading…",
+    "grantAccess": "Allow access",
     "dragToMove": "Drag to move",
     "titleLabel": "Title",
     "titlePlaceholder": "Leave empty to use the feed title",

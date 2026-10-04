@@ -27,6 +27,7 @@ type GroupCardProps = {
   onToggleCollapse: (groupId: string) => void;
   onRemoveGroup: (groupId: string) => void;
   onRemoveFeed: (url: string) => void;
+  onGrantAccess: (url: string) => void;
   onUpdateFeed: (url: string, patch: EditValues) => boolean;
   onUpdateGroup: (groupId: string, patch: { title: string; color: string }) => void;
   onOpenArticle: (title: string, url: string) => boolean;
@@ -35,7 +36,10 @@ type GroupCardProps = {
   onFeedDrop: (event: React.DragEvent<HTMLElement>, groupId: string) => void;
   onGroupDragStart: (event: React.DragEvent<HTMLElement>, group: Group) => void;
   onGroupDrop: (event: React.DragEvent<HTMLElement>, groupId: string) => void;
-  statusByUrl: Record<string, { loading?: boolean; error?: string | null }>;
+  statusByUrl: Record<
+    string,
+    { loading?: boolean; error?: string | null; needsPermission?: boolean }
+  >;
   itemsByUrl: Record<string, FeedItem[]>;
 };
 
@@ -45,6 +49,7 @@ export function GroupCard({
   onToggleCollapse,
   onRemoveGroup,
   onRemoveFeed,
+  onGrantAccess,
   onUpdateFeed,
   onUpdateGroup,
   onOpenArticle,
@@ -177,6 +182,7 @@ export function GroupCard({
               items={itemsByUrl[feed.url]}
               onOpenArticle={onOpenArticle}
               onPlayAudio={onPlayAudio}
+              onGrantAccess={onGrantAccess}
               onRemove={onRemoveFeed}
               onUpdate={onUpdateFeed}
               onDragStart={onFeedDragStart}

@@ -11,10 +11,14 @@ import { grid, groups as groupsClass, main, over } from './FeedBoard.css';
 type FeedBoardProps = {
   feeds: Feed[];
   groups: Group[];
-  statusByUrl: Record<string, { loading: boolean; error: string | null }>;
+  statusByUrl: Record<
+    string,
+    { loading: boolean; error: string | null; needsPermission?: boolean }
+  >;
   itemsByUrl: Record<string, FeedItem[]>;
   onOpenArticle: (title: string, url: string) => boolean;
   onPlayAudio: (title: string, url: string) => void;
+  onGrantAccess: (url: string) => void;
   onUpdateFeed: (url: string, patch: EditValues) => boolean;
   onUpdateGroup: (groupId: string, patch: { title: string; color: string }) => void;
   onRemoveFeed: (url: string) => Promise<{ ok: boolean; nextFeeds?: Feed[] }>;
@@ -31,6 +35,7 @@ export function FeedBoard({
   itemsByUrl,
   onOpenArticle,
   onPlayAudio,
+  onGrantAccess,
   onRemoveFeed,
   onUpdateFeed,
   onUpdateGroup,
@@ -92,6 +97,7 @@ export function FeedBoard({
             items={itemsByUrl[feed.url]}
             onOpenArticle={onOpenArticle}
             onPlayAudio={onPlayAudio}
+            onGrantAccess={onGrantAccess}
             onUpdate={onUpdateFeed}
             onRemove={(url) => {
               void onRemoveFeed(url);
@@ -121,6 +127,7 @@ export function FeedBoard({
             }}
             onOpenArticle={onOpenArticle}
             onPlayAudio={onPlayAudio}
+            onGrantAccess={onGrantAccess}
             onUpdateFeed={onUpdateFeed}
             onUpdateGroup={onUpdateGroup}
             onFeedDragStart={dragState.handleFeedDragStart}

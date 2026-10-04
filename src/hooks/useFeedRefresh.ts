@@ -68,7 +68,7 @@ export function useFeedRefresh(
     Record<string, ReturnType<typeof parseFeed>['items']>
   >({});
   const [statusByUrl, setStatusByUrl] = useState<
-    Record<string, { loading: boolean; error: string | null }>
+    Record<string, { loading: boolean; error: string | null; needsPermission?: boolean }>
   >({});
 
   const refreshFeed = useCallback(async (feed: Feed) => {
@@ -100,12 +100,24 @@ export function useFeedRefresh(
 
       setStatusByUrl((prev) => ({ ...prev, [key]: { loading: false, error: null } }));
     } catch (error) {
+      let message = error instanceof Error ? error.message : '取得に失敗しました';
+      let needsPermission = false;
+      if (error instanceof TypeError && !getMockFeedKey(feed.url)) {
+        try {
+          const granted = await browser.permissions.contains({
+            origins: [`${new URL(feed.url).origin}/*`],
+          });
+          if (!granted) {
+            message = 'サイトへのアクセス権限がありません';
+            needsPermission = true;
+          }
+        } catch {
+          // 権限確認に失敗した場合は元のエラーを表示する
+        }
+      }
       setStatusByUrl((prev) => ({
         ...prev,
-        [key]: {
-          loading: false,
-          error: error instanceof Error ? error.message : '取得に失敗しました',
-        },
+        [key]: { loading: false, error: message, ...(needsPermission && { needsPermission }) },
       }));
     } finally {
       activeUrls.current.delete(key);
