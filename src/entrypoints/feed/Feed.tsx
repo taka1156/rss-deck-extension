@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddFeedDialog } from '@/components/features/AddFeedDialog/AddFeedDialog.js';
 import { ArticlePane } from '@/components/features/ArticlePane/ArticlePane.js';
+import { CopyrightFooter } from '@/components/features/CopyrightFooter/CopyrightFooter';
 import { DashboardHeader } from '@/components/features/DashboardHeader/DashboardHeader.js';
 import { FeedBoard } from '@/components/features/FeedBoard/FeedBoard.js';
 import { SettingsDialog } from '@/components/features/SettingsDialog/SettingsDialog.js';
@@ -241,6 +242,7 @@ export default function Feed() {
         onCloseArticle={() => setArticle({ title: '', url: '' })}
         onCloseAudio={() => setAudio({ label: '', url: '' })}
       />
+      <CopyrightFooter />
     </>
   );
 }
