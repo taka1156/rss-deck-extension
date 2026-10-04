@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import '@/styles/theme.css';
+import { CopyrightFooter } from '@/components/features/CopyrightFooter/CopyrightFooter';
 import { DashboardHeader } from '@/components/features/DashboardHeader/DashboardHeader';
 import * as styles from './Help.css';
 
@@ -148,6 +149,7 @@ export default function Help() {
           </div>
         </section>
       </main>
+      <CopyrightFooter />
     </>
   );
 }
