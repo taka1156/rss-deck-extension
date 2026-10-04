@@ -144,6 +144,32 @@ describe('parseFeed', () => {
         items.every((item) => item.thumb.startsWith('chrome-extension://test/mock-feeds/art/')),
       ).toBe(true);
       expect(items.every((item) => item.link.startsWith('https://example.com/'))).toBe(true);
+
+      const demoAudio =
+        fixture === 'en/briefing'
+          ? {
+              file: 'podcast-test-en.mp3',
+              title: '[TEST TONE]',
+              description: 'No speech, narration, or podcast content',
+            }
+          : fixture === 'ja/briefing'
+            ? {
+                file: 'podcast-test-ja.mp3',
+                title: '【テスト音】',
+                description: '人の声や読み上げ、ポッドキャストの内容は含みません',
+              }
+            : null;
+      if (demoAudio) {
+        expect(items[0]?.title).toContain(demoAudio.title);
+        expect(items[0]?.description).toContain(demoAudio.description);
+        expect(items[0]?.audio).toBe(`chrome-extension://test/mock-feeds/audio/${demoAudio.file}`);
+        expect(
+          readFileSync(resolve(process.cwd(), 'src/public/mock-feeds/audio', demoAudio.file))
+            .byteLength,
+        ).toBeGreaterThan(0);
+      } else {
+        expect(items.every((item) => item.audio === '')).toBe(true);
+      }
     });
   }
 });
