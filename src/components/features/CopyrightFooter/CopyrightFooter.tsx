@@ -1,3 +1,5 @@
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import { copyrightFooter, copyrightLink } from './CopyrightFooter.css';
 
 export function CopyrightFooter() {
@@ -6,23 +8,18 @@ export function CopyrightFooter() {
   return (
     <footer className={copyrightFooter}>
       ©{' '}
-      <a
-        className={copyrightLink}
-        href="https://github.com/taka1156"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <BaseLink className={copyrightLink} href="https://github.com/taka1156">
         taka1156
-      </a>
-      <span aria-hidden="true">·</span>
-      <a
+      </BaseLink>
+      <BaseText size="small" aria-hidden="true">
+        ·
+      </BaseText>
+      <BaseLink
         className={copyrightLink}
         href="https://github.com/taka1156/rss-decks-extension/releases/latest"
-        target="_blank"
-        rel="noopener noreferrer"
       >
         {name} - v{version}
-      </a>
+      </BaseLink>
     </footer>
   );
 }

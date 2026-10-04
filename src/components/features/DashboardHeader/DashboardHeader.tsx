@@ -3,18 +3,11 @@ import { useTranslation } from 'react-i18next';
 import iconUrl from '@/assets/icon.png';
 import { LanguageMenu } from '@/components/features/LanguageMenu/LanguageMenu';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
-import { baseButton, buttonSub } from '@/components/shared/BaseButton/BaseButton.css';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
 import { BaseInput } from '@/components/shared/BaseInput/BaseInput';
-import {
-  brand,
-  brandIcon,
-  checkLabel,
-  demoBadge,
-  header,
-  helpLink,
-  title,
-  tools,
-} from './DashboardHeader.css';
+import { BaseLabel } from '@/components/shared/BaseLabel/BaseLabel';
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { brand, brandIcon, demoBadge, header, title, tools } from './DashboardHeader.css';
 
 type DashboardHeaderProps = {
   // Omit the dashboard handlers to render the minimal header used by the help page.
@@ -75,7 +68,9 @@ export function DashboardHeader({
     <header className={header}>
       <button className={brand} type="button" aria-label="RSS Decks" onClick={handleLogoClick}>
         <img className={brandIcon} src={iconUrl} alt="RSS Decks Logo" />
-        <h1 className={title}>RSS Decks</h1>
+        <BaseHeading hLv="1" className={title}>
+          RSS Decks
+        </BaseHeading>
         {demoMode && (
           <span className={demoBadge} aria-hidden="true">
             DEMO
@@ -108,16 +103,10 @@ export function DashboardHeader({
             >
               {t('header.settings')}
             </BaseButton>
-            <a
-              id="helpLink"
-              className={`${baseButton} ${buttonSub} ${helpLink}`}
-              href="/help.html"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <BaseLink id="helpLink" variant="button" href="/help.html">
               {t('header.help')}
-            </a>
-            <label className={checkLabel} htmlFor="sideToggle">
+            </BaseLink>
+            <BaseLabel direction="row" htmlFor="sideToggle">
               <BaseInput
                 type="checkbox"
                 id="sideToggle"
@@ -125,7 +114,7 @@ export function DashboardHeader({
                 onChange={(event) => onSideOpenChange?.(event.target.checked)}
               />
               {t('header.sideToggle')}
-            </label>
+            </BaseLabel>
           </>
         )}
         <LanguageMenu />

@@ -23,7 +23,6 @@ export const copyrightFooter = style({
 
 export const copyrightLink = style({
   color: 'var(--text-soft)',
-  textDecoration: 'none',
   ':hover': {
     textDecoration: 'underline',
   },

@@ -32,7 +32,6 @@ export const brand = style({
   fontSize: '0.78rem',
   fontWeight: 800,
   letterSpacing: '0.18em',
-  textDecoration: 'none',
 });
 
 export const brandMark = style({
@@ -55,7 +54,6 @@ export const nav = style({
   color: '#66726a',
 });
 
-globalStyle(`${nav} a`, { color: 'inherit', textDecoration: 'none' });
 globalStyle(`${nav} a:hover`, { color: '#314f41', textDecoration: 'underline' });
 
 export const articlePage = style({
@@ -80,8 +78,6 @@ export const breadcrumb = style({
   fontSize: '0.76rem',
 });
 
-globalStyle(`${breadcrumb} a`, { color: 'inherit', textDecoration: 'none' });
-
 export const articleHeader = style({
   maxWidth: '760px',
   margin: '0 auto',
@@ -99,7 +95,6 @@ export const category = style({
 });
 
 export const title = style({
-  margin: 0,
   fontSize: 'clamp(2.1rem, 5.5vw, 3.5rem)',
   lineHeight: 1.35,
   letterSpacing: '0.025em',

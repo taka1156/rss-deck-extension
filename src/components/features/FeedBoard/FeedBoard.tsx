@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { EditValues } from '@/components/features/EditForm/EditForm';
 import { FeedCard } from '@/components/features/FeedCard/FeedCard';
 import { GroupCard } from '@/components/features/GroupCard/GroupCard';
+import { BaseList } from '@/components/shared/BaseList/BaseList';
 import { useFeedDragAndDrop } from '@/hooks/useFeedDragAndDrop';
 import type { Feed, Group } from '@/storage/feedDashboard';
 import type { FeedItem } from '@/utils/feedParser';
@@ -70,8 +72,8 @@ export function FeedBoard({
 
   return (
     <main className={main}>
-      <ul
-        className={`${grid} ${ungroupedOver ? over : ''}`.trim()}
+      <BaseList
+        className={clsx(grid, ungroupedOver && over)}
         id="ungroupedGrid"
         data-group=""
         aria-label={t('board.ungroupedLabel')}
@@ -108,9 +110,9 @@ export function FeedBoard({
             }}
           />
         ))}
-      </ul>
+      </BaseList>
 
-      <ul id="groups" className={groupsClass} aria-label={t('board.groupsLabel')}>
+      <BaseList id="groups" className={groupsClass} aria-label={t('board.groupsLabel')}>
         {groupedFeeds.grouped.map((entry) => (
           <GroupCard
             key={entry.group.id}
@@ -142,7 +144,7 @@ export function FeedBoard({
             itemsByUrl={itemsByUrl}
           />
         ))}
-      </ul>
+      </BaseList>
     </main>
   );
 }

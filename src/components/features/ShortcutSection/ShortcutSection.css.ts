@@ -16,7 +16,6 @@ export const toolbar = style({
 });
 
 export const toolbarTitle = style({
-  margin: 0,
   fontSize: '14px',
 });
 
@@ -44,7 +43,6 @@ export const link = style({
   maxWidth: '240px',
   color: 'var(--text)',
   fontSize: '13px',
-  textDecoration: 'none',
 });
 
 globalStyle(`${link} > span:last-child`, {

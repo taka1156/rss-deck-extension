@@ -1,4 +1,8 @@
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
+import { BaseList } from '@/components/shared/BaseList/BaseList';
 import { useCardDragState } from '@/hooks/useCardDragState';
 import { useColorPreview } from '@/hooks/useColorPreview';
 import { useEditState } from '@/hooks/useEditState';
@@ -16,9 +20,7 @@ import {
   groupHead,
   groupTitle,
   handle,
-  icon,
   over,
-  toggle,
 } from './GroupCard.css';
 
 type GroupCardProps = {
@@ -78,7 +80,7 @@ export function GroupCard({
 
   return (
     <li
-      className={`${group} ${groupData.collapsed ? collapsed : ''} ${isDragging ? dragging : ''}`.trim()}
+      className={clsx(group, groupData.collapsed && collapsed, isDragging && dragging)}
       style={groupColor ? ({ ['--gc' as string]: groupColor } as React.CSSProperties) : undefined}
       draggable={dragReady}
       onDragStart={(event) => {
@@ -108,27 +110,26 @@ export function GroupCard({
         >
           ⠿
         </span>
-        <button
-          type="button"
-          className={toggle}
+        <BaseButton
+          variant="ghost"
           title={t('group.toggle')}
           onClick={() => onToggleCollapse(groupData.id)}
         >
           {groupData.collapsed ? '▸' : '▾'}
-        </button>
-        <h2 className={groupTitle}>{groupData.title || t('group.untitled')}</h2>
+        </BaseButton>
+        <BaseHeading hLv="2" className={groupTitle}>
+          {groupData.title || t('group.untitled')}
+        </BaseHeading>
         <div className={actions}>
-          <button
-            type="button"
-            className={icon}
+          <BaseButton
+            variant="ghost"
             title={t('common.edit')}
             onClick={() => (editing ? closeEdit() : setEditing(true))}
           >
             ✎
-          </button>
-          <button
-            type="button"
-            className={icon}
+          </BaseButton>
+          <BaseButton
+            variant="ghost"
             title={t('group.deleteTitle')}
             onClick={() => {
               if (window.confirm(t('group.deleteConfirm'))) {
@@ -137,7 +138,7 @@ export function GroupCard({
             }}
           >
             ×
-          </button>
+          </BaseButton>
         </div>
       </div>
       {editing && (
@@ -153,9 +154,9 @@ export function GroupCard({
           }}
         />
       )}
-      <ul
+      <BaseList
         data-empty-label={t('group.dropHere')}
-        className={`${feedList} ${groupData.collapsed ? collapsedList : ''} ${isOver ? over : ''}`.trim()}
+        className={clsx(feedList, groupData.collapsed && collapsedList, isOver && over)}
         data-group={groupData.id}
         aria-label={t('group.feedsLabel', { title: groupData.title || t('group.fallbackName') })}
         onDragOver={(event) => {
@@ -189,7 +190,7 @@ export function GroupCard({
               onDrop={onFeedDrop}
             />
           ))}
-      </ul>
+      </BaseList>
     </li>
   );
 }
