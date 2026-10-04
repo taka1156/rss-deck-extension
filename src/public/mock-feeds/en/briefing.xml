@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Pocket Observatory</title>
+    <link>https://example.com/observatory</link>
+    <description>Small, fictional notes for looking at the sky.</description>
+    <item>
+      <title>A brighter dot on the evening horizon</title>
+      <link>https://example.com/observatory/evening-dot</link>
+      <guid>https://example.com/observatory/evening-dot</guid>
+      <pubDate>Sun, 04 Oct 2026 08:30:00 GMT</pubDate>
+      <description>A made-up field note about the changing colors of dusk.</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>The quiet geometry of a winter moon</title>
+      <link>https://example.com/observatory/winter-moon</link>
+      <guid>https://example.com/observatory/winter-moon</guid>
+      <pubDate>Sat, 03 Oct 2026 07:15:00 GMT</pubDate>
+      <description>Try tracing the curve of the moon from one night to the next.</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>Three small things to notice at dawn</title>
+      <link>https://example.com/observatory/three-at-dawn</link>
+      <guid>https://example.com/observatory/three-at-dawn</guid>
+      <pubDate>Fri, 02 Oct 2026 05:00:00 GMT</pubDate>
+      <description>A fictional checklist for a slow morning walk.</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>Mapping the color of a clear sky</title>
+      <link>https://example.com/observatory/sky-colors</link>
+      <guid>https://example.com/observatory/sky-colors</guid>
+      <pubDate>Thu, 01 Oct 2026 09:45:00 GMT</pubDate>
+      <description>Collect imaginary shades from pale blue to deep indigo.</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+  </channel>
+</rss>

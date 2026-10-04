@@ -6,6 +6,7 @@ export type FeedItem = {
   date: string;
   thumb: string;
   audio: string;
+  description?: string;
 };
 
 const MAX_ITEMS = 15;
@@ -135,6 +136,7 @@ export function parseFeed(xml: string, base: string): { title: string; items: Fe
         '',
       thumb: findThumb(item, base) || channelImage,
       audio: findAudio(item, base),
+      description: str(item.description) || str(item.summary) || str(item.content),
     };
   });
   return { title: str(feed.title) || '(無題)', items };

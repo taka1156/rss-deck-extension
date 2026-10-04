@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>よりみちアイデア室</title>
+    <link>https://example.com/yorimichi</link>
+    <description>気軽に試せる、架空の小さな創作お題です。</description>
+    <item>
+      <title>音のするものを集めてみる</title>
+      <link>https://example.com/yorimichi/sounds</link>
+      <guid>https://example.com/yorimichi/sounds</guid>
+      <pubDate>Sun, 04 Oct 2026 02:25:00 GMT</pubDate>
+      <description>身のまわりの小さな音に耳をすませる創作のお題。</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>明日を小さな島に描いてみる</title>
+      <link>https://example.com/yorimichi/island</link>
+      <guid>https://example.com/yorimichi/island</guid>
+      <pubDate>Fri, 02 Oct 2026 03:30:00 GMT</pubDate>
+      <description>ひとつのよいアイデアがたどり着く場所を描いてみます。</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>一分でつくる、架空の地図</title>
+      <link>https://example.com/yorimichi/imaginary-map</link>
+      <guid>https://example.com/yorimichi/imaginary-map</guid>
+      <pubDate>Thu, 01 Oct 2026 11:00:00 GMT</pubDate>
+      <description>知っている場所を三つ選び、存在しない道で結びます。</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>あとで書くための余白を残す</title>
+      <link>https://example.com/yorimichi/blank-page</link>
+      <guid>https://example.com/yorimichi/blank-page</guid>
+      <pubDate>Tue, 29 Sep 2026 06:50:00 GMT</pubDate>
+      <description>まだ何もない場所が、次の始まりになることもあります。</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+  </channel>
+</rss>

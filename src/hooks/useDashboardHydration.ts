@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { type Feed, loadDashboardState } from '@/storage/feedDashboard';
+import { type DashboardState, type Feed, loadDashboardState } from '@/storage/feedDashboard';
 
 const DEFAULT_FEEDS = [
   'https://zenn.dev/feed',
@@ -21,9 +21,18 @@ export function useDashboardHydration(
   ) => unknown,
   loadShortcuts: (shortcuts: { url: string }[]) => unknown,
   setFeeds: (feeds: Feed[]) => void,
+  demoState?: DashboardState,
 ) {
   useEffect(() => {
     void (async () => {
+      if (demoState) {
+        setSideOpen(demoState.sideOpen);
+        loadGroups(demoState.groups);
+        loadShortcuts(demoState.shortcuts);
+        setFeeds(demoState.feeds);
+        return;
+      }
+
       const state = await loadDashboardState();
       setSideOpen(state.sideOpen);
       loadGroups(state.groups);
@@ -31,5 +40,5 @@ export function useDashboardHydration(
       const nextFeeds = state.feeds.length > 0 ? state.feeds : DEFAULT_FEEDS.map(normalizeFeed);
       setFeeds(nextFeeds);
     })();
-  }, [loadGroups, loadShortcuts, setFeeds, setSideOpen]);
+  }, [demoState, loadGroups, loadShortcuts, setFeeds, setSideOpen]);
 }
