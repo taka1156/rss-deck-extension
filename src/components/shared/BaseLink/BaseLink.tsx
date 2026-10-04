@@ -22,5 +22,7 @@ export function BaseLink({
 }: BaseLinkProps) {
   const classes = clsx(baseLink, variant === 'button' && [baseButton, buttonSub], className);
 
-  return <a {...props} className={classes} target="_blank" rel="noopener noreferrer" />;
+  const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+
+  return <a {...props} className={classes} {...externalProps} />;
 }

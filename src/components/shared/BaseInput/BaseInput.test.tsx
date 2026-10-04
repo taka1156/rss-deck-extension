@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { BaseInput } from './BaseInput';
+import { baseInput } from './BaseInput.css';
 
 describe('BaseInput', () => {
   it('renders an input element', () => {
@@ -77,5 +78,10 @@ describe('BaseInput', () => {
     expect(input).toHaveAttribute('maxlength', '100');
     expect(input).toHaveAttribute('min', '1');
     expect(input).toHaveAttribute('max', '100');
+  });
+
+  it('applies the base class and merges className', () => {
+    render(<BaseInput className="custom" data-testid="input" />);
+    expect(screen.getByTestId('input')).toHaveClass(baseInput, 'custom');
   });
 });

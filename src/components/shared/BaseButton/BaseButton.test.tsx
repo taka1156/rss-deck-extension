@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { BaseButton } from './BaseButton';
+import { baseButton, buttonGhost, buttonIcon, buttonMenuItem, buttonSub } from './BaseButton.css';
 
 describe('BaseButton', () => {
   it('renders button with default text', () => {
@@ -80,5 +81,21 @@ describe('BaseButton', () => {
     );
     const button = screen.getByTestId('custom-button');
     expect(button).toHaveAttribute('aria-label', 'Test button');
+  });
+
+  it.each([
+    ['default', undefined],
+    ['secondary', buttonSub],
+    ['icon', buttonIcon],
+    ['ghost', buttonGhost],
+    ['menuItem', buttonMenuItem],
+  ] as const)('variant=%s applies only its own variant class', (variant, variantClass) => {
+    render(<BaseButton variant={variant}>btn</BaseButton>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass(baseButton);
+    for (const cls of [buttonSub, buttonIcon, buttonGhost, buttonMenuItem]) {
+      if (cls === variantClass) expect(button).toHaveClass(cls);
+      else expect(button).not.toHaveClass(cls);
+    }
   });
 });
