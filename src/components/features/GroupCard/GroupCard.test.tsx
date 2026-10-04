@@ -33,6 +33,7 @@ describe('GroupCard', () => {
     onToggleCollapse: vi.fn(),
     onRemoveGroup: vi.fn(),
     onRemoveFeed: vi.fn(),
+    onGrantAccess: vi.fn(),
     onUpdateFeed: vi.fn(() => true),
     onUpdateGroup: vi.fn(),
     onOpenArticle: vi.fn(() => true),

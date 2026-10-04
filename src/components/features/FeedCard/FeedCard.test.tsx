@@ -38,6 +38,7 @@ describe('FeedCard', () => {
     onOpenArticle: vi.fn(() => true),
     onPlayAudio: vi.fn(),
     onRemove: vi.fn(),
+    onGrantAccess: vi.fn(),
     onUpdate: vi.fn(() => true),
     onDragStart: vi.fn(),
     onDrop: vi.fn(),
