@@ -5,11 +5,12 @@
     <link>https://example.com/hoshizora</link>
     <description>空を見上げるための架空の観察メモです。</description>
     <item>
-      <title>夕暮れの空に見つけた小さな光</title>
+      <title>【テスト音】夕暮れの空に見つけた小さな光</title>
       <link>https://example.com/hoshizora/evening-light</link>
       <guid>https://example.com/hoshizora/evening-light</guid>
       <pubDate>Sun, 04 Oct 2026 08:30:00 GMT</pubDate>
-      <description>日が沈むころ、空の色が変わる様子をゆっくり眺めます。</description>
+      <description>RSS Decksの音声再生を確認するための3秒のサイン波です。人の声や読み上げ、ポッドキャストの内容は含みません。</description>
+      <enclosure url="../audio/podcast-test-ja.mp3" length="12761" type="audio/mpeg" />
       <media:thumbnail url="../art/orbit.svg" />
     </item>
     <item>
