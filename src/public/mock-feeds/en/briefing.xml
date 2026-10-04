@@ -5,11 +5,12 @@
     <link>https://example.com/observatory</link>
     <description>Small, fictional notes for looking at the sky.</description>
     <item>
-      <title>A brighter dot on the evening horizon</title>
+      <title>[TEST TONE] A brighter dot on the evening horizon</title>
       <link>https://example.com/observatory/evening-dot</link>
       <guid>https://example.com/observatory/evening-dot</guid>
       <pubDate>Sun, 04 Oct 2026 08:30:00 GMT</pubDate>
-      <description>A made-up field note about the changing colors of dusk.</description>
+      <description>Three-second sine tone for testing RSS Decks audio playback. No speech, narration, or podcast content is included.</description>
+      <enclosure url="../audio/podcast-test-en.mp3" length="12761" type="audio/mpeg" />
       <media:thumbnail url="../art/orbit.svg" />
     </item>
     <item>
