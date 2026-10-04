@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Field Notes for Curious Minds</title>
+    <link>https://example.com/field-notes</link>
+    <description>Imaginary observations from a tiny green corner.</description>
+    <item>
+      <title>A pocket garden after the rain</title>
+      <link>https://example.com/field-notes/pocket-garden</link>
+      <guid>https://example.com/field-notes/pocket-garden</guid>
+      <pubDate>Sun, 04 Oct 2026 06:20:00 GMT</pubDate>
+      <description>Invent a garden from a few leaves, raindrops and a little patience.</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>Following a river made of light</title>
+      <link>https://example.com/field-notes/river-of-light</link>
+      <guid>https://example.com/field-notes/river-of-light</guid>
+      <pubDate>Sat, 03 Oct 2026 04:40:00 GMT</pubDate>
+      <description>A fictional walk where every puddle becomes a tiny map.</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>How many greens fit in one leaf?</title>
+      <link>https://example.com/field-notes/shades-of-green</link>
+      <guid>https://example.com/field-notes/shades-of-green</guid>
+      <pubDate>Fri, 02 Oct 2026 10:10:00 GMT</pubDate>
+      <description>Notice the difference between the bright edge and the shaded center.</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>A tiny atlas of backyard clouds</title>
+      <link>https://example.com/field-notes/backyard-clouds</link>
+      <guid>https://example.com/field-notes/backyard-clouds</guid>
+      <pubDate>Wed, 30 Sep 2026 08:05:00 GMT</pubDate>
+      <description>Give passing clouds gentle names in this made-up sky guide.</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+  </channel>
+</rss>

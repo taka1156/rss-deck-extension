@@ -66,6 +66,7 @@
     "play": "Play"
   },
   "header": {
+    "demoAlert": "You have clicked the logo 5 times!\nClick 10 times to enable demo mode.\nTo exit demo mode, click the logo when it shows \"DEMO\".",
     "add": "+ Add",
     "addGroup": "+ Group",
     "refresh": "Refresh",

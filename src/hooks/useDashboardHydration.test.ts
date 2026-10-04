@@ -47,4 +47,26 @@ describe('useDashboardHydration', () => {
     ]);
     expect(feeds[0]).toEqual({ url: 'https://zenn.dev/feed', title: '', color: '', group: '' });
   });
+
+  it('applies demo state without reading or modifying stored settings', async () => {
+    const demoState = {
+      feeds: [{ url: 'mock://ja/briefing', title: 'Demo', color: '', group: 'demo' }],
+      groups: [{ id: 'demo', title: 'Demo', color: '', collapsed: false }],
+      shortcuts: [{ url: 'https://example.com' }],
+      sideOpen: true,
+    };
+    const setSideOpen = vi.fn();
+    const loadGroups = vi.fn();
+    const loadShortcuts = vi.fn();
+    const setFeeds = vi.fn();
+    renderHook(() =>
+      useDashboardHydration(setSideOpen, loadGroups, loadShortcuts, setFeeds, demoState),
+    );
+
+    await waitFor(() => expect(setFeeds).toHaveBeenCalledWith(demoState.feeds));
+    expect(loadDashboardState).not.toHaveBeenCalled();
+    expect(setSideOpen).toHaveBeenCalledWith(true);
+    expect(loadGroups).toHaveBeenCalledWith(demoState.groups);
+    expect(loadShortcuts).toHaveBeenCalledWith(demoState.shortcuts);
+  });
 });

@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import iconUrl from '@/assets/icon.png';
 import { LanguageMenu } from '@/components/features/LanguageMenu/LanguageMenu';
@@ -8,6 +9,7 @@ import {
   brand,
   brandIcon,
   checkLabel,
+  demoBadge,
   header,
   helpLink,
   title,
@@ -22,6 +24,8 @@ type DashboardHeaderProps = {
   onAddGroup?: () => void;
   onRefresh?: () => void;
   onSideOpenChange?: (checked: boolean) => void;
+  onDemoMode?: () => void;
+  demoMode?: boolean;
 };
 
 export function DashboardHeader({
@@ -31,16 +35,53 @@ export function DashboardHeader({
   onAddGroup,
   onRefresh,
   onSideOpenChange,
+  onDemoMode,
+  demoMode = false,
 }: DashboardHeaderProps) {
   const { t } = useTranslation();
   const isDashboard = Boolean(onOpenAddPanel);
+  const logoClickCount = useRef(0);
+
+  const handleLogoClick = () => {
+    // Clicking the logo 10 times when demo mode is not enabled will activate demo mode.
+    // If demo mode is enabled, you will be redirected to the feed page to disable Demo Mode.
+    if (!demoMode) {
+      logoClickCount.current += 1;
+
+      if (logoClickCount.current === 5) {
+        alert(t('header.demoAlert'));
+        return;
+      }
+
+      if (logoClickCount.current < 10) {
+        return;
+      }
+
+      logoClickCount.current = 0;
+
+      if (onDemoMode) {
+        onDemoMode();
+        return;
+      }
+
+      window.location.assign(browser.runtime.getURL('/feed.html?demo=1'));
+      return;
+    }
+
+    window.location.assign(browser.runtime.getURL('/feed.html'));
+  };
 
   return (
     <header className={header}>
-      <div className={brand}>
+      <button className={brand} type="button" aria-label="RSS Decks" onClick={handleLogoClick}>
         <img className={brandIcon} src={iconUrl} alt="RSS Decks Logo" />
         <h1 className={title}>RSS Decks</h1>
-      </div>
+        {demoMode && (
+          <span className={demoBadge} aria-hidden="true">
+            DEMO
+          </span>
+        )}
+      </button>
       <div className={tools}>
         {isDashboard && (
           <>

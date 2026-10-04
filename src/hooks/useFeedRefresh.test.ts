@@ -40,6 +40,75 @@ describe('useFeedRefresh', () => {
     expect(updateFeed).toHaveBeenCalledWith('https://a.test', { title: 'Parsed' });
   });
 
+  it('loads bundled mock feeds without changing their stored URL', async () => {
+    const extensionUrl = 'chrome-extension://test/mock-feeds/ja/briefing.xml';
+    vi.stubGlobal('browser', {
+      runtime: { getURL: vi.fn((path) => `chrome-extension://test${path}`) },
+    });
+    fetchMock.mockResolvedValue(res(200, '<xml/>'));
+    parseFeed.mockReturnValue({
+      title: '小さな星空便り',
+      items: [
+        {
+          title: '空の便り',
+          link: 'https://example.com/hoshizora/evening-light',
+          date: '',
+          thumb: '',
+          audio: '',
+        },
+      ],
+    });
+    const updateFeed = vi.fn().mockResolvedValue({ ok: true });
+    const { result } = renderHook(() =>
+      useFeedRefresh([feed('mock://ja/briefing', '小さな星空便り')], updateFeed),
+    );
+
+    await flush();
+
+    expect(fetchMock).toHaveBeenCalledWith(extensionUrl);
+    expect(parseFeed).toHaveBeenCalledWith('<xml/>', extensionUrl);
+    expect(result.current.itemsByUrl['mock://ja/briefing']?.[0]?.link).toBe(
+      'chrome-extension://test/demo-article.html?feed=ja%2Fbriefing&slug=evening-light',
+    );
+    expect(updateFeed).not.toHaveBeenCalled();
+  });
+
+  it('rewrites demo story links to the internal article page', async () => {
+    const extensionUrl = 'chrome-extension://test/feed.html';
+    vi.stubGlobal('browser', { runtime: { getURL: () => extensionUrl } });
+    parseFeed.mockReturnValue({
+      title: '観察ノート',
+      items: [
+        {
+          title: '川の光',
+          link: 'https://example.com/kansatsu/river-of-light',
+          date: '',
+          thumb: '',
+          audio: '',
+        },
+      ],
+    });
+    fetchMock.mockResolvedValue(res(200, '<xml/>'));
+    const { result } = renderHook(() =>
+      useFeedRefresh([feed('mock://ja/field-notes', '観察ノート')], vi.fn()),
+    );
+
+    await flush();
+
+    expect(result.current.itemsByUrl['mock://ja/field-notes']?.[0]?.link).toBe(
+      'chrome-extension://test/demo-article.html?feed=ja%2Ffield-notes&slug=river-of-light',
+    );
+  });
+
+  it('reports an error for unsupported mock feed URLs', async () => {
+    const { result } = renderHook(() => useFeedRefresh([feed('mock://ja/unknown')], vi.fn()));
+
+    await flush();
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(result.current.statusByUrl['mock://ja/unknown']?.error).toBe('不明なモックフィードです');
+  });
+
   it('does not update the title when one already exists', async () => {
     fetchMock.mockResolvedValue(res(200, 'x'));
     const updateFeed = vi.fn().mockResolvedValue({ ok: true });

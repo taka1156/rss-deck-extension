@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "shortcuts": [
+    {
+      "url": "https://example.com/hoshizora"
+    },
+    {
+      "url": "https://example.com/kansatsu"
+    },
+    {
+      "url": "https://example.com/yorimichi"
+    }
+  ],
+  "groups": [
+    {
+      "collapsed": false,
+      "color": "#eb2455",
+      "id": "mupnizrm",
+      "title": "星空便り"
+    },
+    {
+      "collapsed": false,
+      "color": "#2766ec",
+      "id": "mupnbj1e",
+      "title": "観察ノート"
+    },
+    {
+      "collapsed": true,
+      "color": "#8a2be2",
+      "id": "mupnq4k9",
+      "title": "アイデア室"
+    }
+  ],
+  "feeds": [
+    {
+      "url": "mock://ja/briefing",
+      "title": "小さな星空便り",
+      "color": "#eb2455",
+      "group": "mupnizrm"
+    },
+    {
+      "url": "mock://ja/field-notes",
+      "title": "好奇心の観察ノート",
+      "color": "#2766ec",
+      "group": "mupnbj1e"
+    },
+    {
+      "url": "mock://ja/studio",
+      "title": "よりみちアイデア室",
+      "color": "#8a2be2",
+      "group": "mupnq4k9"
+    }
+  ]
+}

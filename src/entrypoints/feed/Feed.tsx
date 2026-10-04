@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddFeedDialog } from '@/components/features/AddFeedDialog/AddFeedDialog.js';
 import { ArticlePane } from '@/components/features/ArticlePane/ArticlePane.js';
@@ -13,10 +13,12 @@ import { useFeedRefresh } from '@/hooks/useFeedRefresh.js';
 import { useGroupActions } from '@/hooks/useGroupActions.js';
 import { useShortcutActions } from '@/hooks/useShortcutActions.js';
 import { saveDashboardState, saveShortcuts } from '@/storage/feedDashboard';
+import { getDemoSettings } from '@/utils/demoSettings';
 import { requestHostAccess } from '@/utils/hostPermission';
 
 export default function Feed() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const demoMode = new URLSearchParams(window.location.search).get('demo') === '1';
   const feedState = useFeedActions();
   const groupState = useGroupActions();
   const shortcutState = useShortcutActions();
@@ -25,6 +27,16 @@ export default function Feed() {
   const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [article, setArticle] = useState({ title: '', url: '' });
   const [audio, setAudio] = useState({ label: '', url: '' });
+  const demoState = useMemo(
+    () => (demoMode ? getDemoSettings(i18n.language) : undefined),
+    [demoMode, i18n.language],
+  );
+  const dashboardState = {
+    feeds: feedState.feeds,
+    groups: groupState.groups,
+    shortcuts: shortcutState.shortcuts,
+    sideOpen,
+  };
 
   const persistence = useDashboardPersistence(
     feedState.feeds,
@@ -38,17 +50,31 @@ export default function Feed() {
     groupState.loadGroups,
     shortcutState.loadShortcuts,
     feedState.setFeeds,
+    demoState,
+  );
+
+  const persistDashboardState = useCallback(
+    async (feeds: typeof feedState.feeds, groups: typeof groupState.groups) => {
+      if (!demoMode) await saveDashboardState(feeds, groups);
+    },
+    [demoMode],
+  );
+  const persistShortcuts = useCallback(
+    async (shortcuts: typeof shortcutState.shortcuts) => {
+      if (!demoMode) await saveShortcuts(shortcuts);
+    },
+    [demoMode],
   );
 
   const updateFeed = useCallback(
     async (url: string, patch: Partial<(typeof feedState.feeds)[number]>) => {
       const result = feedState.updateFeed(url, patch);
       if (result.ok) {
-        await saveDashboardState(result.nextFeeds, groupState.groups);
+        await persistDashboardState(result.nextFeeds, groupState.groups);
       }
       return result;
     },
-    [feedState.updateFeed, groupState.groups],
+    [feedState.updateFeed, groupState.groups, persistDashboardState],
   );
   const feedRefresh = useFeedRefresh(feedState.feeds, updateFeed);
 
@@ -57,38 +83,39 @@ export default function Feed() {
       if (!(await requestHostAccess([url]))) return { ok: false as const, reason: 'denied' };
       const result = feedState.addFeed(url);
       if (result.ok) {
-        await saveDashboardState(result.nextFeeds, groupState.groups);
+        await persistDashboardState(result.nextFeeds, groupState.groups);
       }
       return result;
     },
-    [feedState, groupState.groups],
+    [feedState, groupState.groups, persistDashboardState],
   );
 
   const addShortcut = useCallback(
     async (url: string) => {
       const result = shortcutState.addShortcut(url);
       if (result.ok) {
-        await saveShortcuts(result.nextShortcuts);
+        await persistShortcuts(result.nextShortcuts);
       }
       return result;
     },
-    [shortcutState],
+    [persistShortcuts, shortcutState],
   );
 
   const addGroup = useCallback(
     async (title?: string) => {
       const result = groupState.addGroup(title);
       if (result.ok) {
-        await saveDashboardState(feedState.feeds, result.nextGroups);
+        await persistDashboardState(feedState.feeds, result.nextGroups);
       }
       return result;
     },
-    [feedState.feeds, groupState],
+    [feedState.feeds, groupState, persistDashboardState],
   );
 
   return (
     <>
       <DashboardHeader
+        demoMode={demoMode}
         sideOpen={sideOpen}
         onOpenAddPanel={() => setAddDialogOpen(true)}
         onOpenSettingsPanel={() => setSettingsDialogOpen(true)}
@@ -117,8 +144,10 @@ export default function Feed() {
       <SettingsDialog
         open={settingsDialogOpen}
         onOpenChange={setSettingsDialogOpen}
+        persist={!demoMode}
+        state={dashboardState}
         onImport={async (nextState) => {
-          await requestHostAccess(nextState.feeds.map((feed) => feed.url));
+          if (!demoMode) await requestHostAccess(nextState.feeds.map((feed) => feed.url));
           feedState.setFeeds(nextState.feeds);
           groupState.loadGroups(nextState.groups);
           shortcutState.loadShortcuts(nextState.shortcuts);
@@ -132,7 +161,7 @@ export default function Feed() {
         onRemoveShortcut={(url) => {
           const result = shortcutState.removeShortcut(url);
           if (result.ok) {
-            void saveShortcuts(result.nextShortcuts);
+            void persistShortcuts(result.nextShortcuts);
           }
         }}
       />
@@ -153,7 +182,7 @@ export default function Feed() {
         onRemoveFeed={async (url) => {
           const result = feedState.removeFeed(url);
           if (result.ok) {
-            await saveDashboardState(result.nextFeeds, groupState.groups);
+            await persistDashboardState(result.nextFeeds, groupState.groups);
           }
           return result;
         }}
@@ -165,17 +194,17 @@ export default function Feed() {
             return false;
           }
           const result = feedState.updateFeed(url, { ...patch, url: nextUrl });
-          void saveDashboardState(result.nextFeeds, groupState.groups);
+          void persistDashboardState(result.nextFeeds, groupState.groups);
           return true;
         }}
         onUpdateGroup={(groupId, patch) => {
           const result = groupState.updateGroup(groupId, patch);
-          void saveDashboardState(feedState.feeds, result.nextGroups);
+          void persistDashboardState(feedState.feeds, result.nextGroups);
         }}
         onMoveFeed={async (url, group) => {
           const result = feedState.moveFeed(url, group);
           if (result.ok) {
-            await saveDashboardState(result.nextFeeds, groupState.groups);
+            await persistDashboardState(result.nextFeeds, groupState.groups);
           }
           return result;
         }}
@@ -185,21 +214,21 @@ export default function Feed() {
             const nextFeeds = feedState.feeds.map((feed) =>
               feed.group === groupId ? { ...feed, group: '' } : feed,
             );
-            await saveDashboardState(nextFeeds, result.nextGroups);
+            await persistDashboardState(nextFeeds, result.nextGroups);
           }
           return result;
         }}
         onToggleGroupCollapse={async (groupId) => {
           const result = groupState.toggleGroupCollapse(groupId);
           if (result.ok) {
-            await saveDashboardState(feedState.feeds, result.nextGroups);
+            await persistDashboardState(feedState.feeds, result.nextGroups);
           }
           return result;
         }}
         onMoveGroup={async (fromId, toId) => {
           const result = groupState.moveGroup(fromId, toId);
           if (result.ok) {
-            await saveDashboardState(feedState.feeds, result.nextGroups);
+            await persistDashboardState(feedState.feeds, result.nextGroups);
           }
           return result;
         }}
