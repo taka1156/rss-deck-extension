@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vscode/main/extensions/configuration-editing/schemas/devContainer.vscode.schema.json",
-  "name": "rss-blocks-extension",
+  "name": "rss-decks-extension",
   "service": "app",
   "workspaceFolder": "/workspace",
   "dockerComposeFile": "docker-compose.yml",

@@ -34,7 +34,7 @@ RSS Decks is a Manifest V3 Chrome extension built with **WXT** that opens a loca
 - `src/i18n.ts`: i18next setup; language persisted in `localStorage` (`rss-decks-language`), defaults to browser language (`ja` or `en`), fallback `ja`
 - `src/locales/{ja,en}/translation.json`: Translation strings (keep both in sync)
 - `src/styles/`: Theme and global styles
-- `rss-blocks-settings.json`: Settings schema/defaults
+- `rss-decks-settings.json`: Settings schema/defaults
 - `tsconfig.json`: TypeScript configuration
 - `biome.json`: Linting and formatting configuration
 

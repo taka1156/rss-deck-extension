@@ -34,15 +34,8 @@ jobs:
       - name: Build and zip
         run: yarn zip
 
-      - name: Generate checksums
-        run: |
-          set -eu
-          mkdir -p release
-          cp .output/*.zip release/
-          (cd release && sha256sum * > checksums.txt)
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
-          files: release/*
+          files: .output/*.zip
           generate_release_notes: true

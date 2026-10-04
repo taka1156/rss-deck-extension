@@ -32,7 +32,7 @@ describe('useFeedDragAndDrop', () => {
     act(() => result.current.handleFeedDragStart(e, feed));
     expect(result.current.dragState).toEqual({ kind: 'feed', id: feed.url });
     expect(e.dataTransfer.effectAllowed).toBe('move');
-    expect(e.dataTransfer.setData).toHaveBeenCalledWith('application/rss-blocks-feed', feed.url);
+    expect(e.dataTransfer.setData).toHaveBeenCalledWith('application/rss-decks-feed', feed.url);
   });
 
   it('group drag start sets state and data transfer', () => {
@@ -40,7 +40,7 @@ describe('useFeedDragAndDrop', () => {
     const e = makeEvent();
     act(() => result.current.handleGroupDragStart(e, group));
     expect(result.current.dragState).toEqual({ kind: 'group', id: 'g1' });
-    expect(e.dataTransfer.setData).toHaveBeenCalledWith('application/rss-blocks-group', 'g1');
+    expect(e.dataTransfer.setData).toHaveBeenCalledWith('application/rss-decks-group', 'g1');
   });
 
   it('feed drop moves the feed and clears state', () => {

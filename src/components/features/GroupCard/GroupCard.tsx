@@ -155,7 +155,7 @@ export function GroupCard({
         aria-label={t('group.feedsLabel', { title: groupData.title || t('group.fallbackName') })}
         onDragOver={(event) => {
           event.preventDefault();
-          setIsOver(event.dataTransfer.types.includes('application/rss-blocks-feed'));
+          setIsOver(event.dataTransfer.types.includes('application/rss-decks-feed'));
         }}
         onDragLeave={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsOver(false);

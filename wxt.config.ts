@@ -1,4 +1,6 @@
+import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
@@ -10,7 +12,7 @@ export default defineConfig({
       default_title: 'RSS Decks を開く',
     },
     name: 'RSS Decks',
-    version: '1.0.0',
+    version: '0.0.1',
     description: '複数のRSS/Atomフィードをブロック形式で一覧表示します',
   },
   srcDir: 'src',
@@ -37,7 +39,12 @@ export default defineConfig({
         port: 3000,
       },
     },
-    plugins: [vanillaExtractPlugin()],
+    plugins: [
+      vanillaExtractPlugin(),
+      babel({
+        presets: [reactCompilerPreset()],
+      }),
+    ],
   }),
   modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons'],
 });

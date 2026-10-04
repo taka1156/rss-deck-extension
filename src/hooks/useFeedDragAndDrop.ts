@@ -15,13 +15,13 @@ export function useFeedDragAndDrop(
   const handleFeedDragStart = useCallback((event: React.DragEvent<HTMLElement>, feed: Feed) => {
     setDragState({ kind: 'feed', id: feed.url });
     event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('application/rss-blocks-feed', feed.url);
+    event.dataTransfer.setData('application/rss-decks-feed', feed.url);
   }, []);
 
   const handleGroupDragStart = useCallback((event: React.DragEvent<HTMLElement>, group: Group) => {
     setDragState({ kind: 'group', id: group.id });
     event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('application/rss-blocks-group', group.id);
+    event.dataTransfer.setData('application/rss-decks-group', group.id);
   }, []);
 
   const handleFeedDrop = useCallback(

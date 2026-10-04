@@ -41,7 +41,7 @@ export function SettingsDialog({ open, onOpenChange, onImport }: SettingsDialogP
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'rss-blocks-settings.json';
+    link.download = 'rss-decks-settings.json';
     link.click();
     URL.revokeObjectURL(url);
   }, []);
