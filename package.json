@@ -2,7 +2,7 @@
   "name": "rss-decks-extension",
   "description": "複数のRSS/Atomフィードをブロック形式で一覧表示します",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "prepare": "husky",
