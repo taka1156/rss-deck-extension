@@ -12,7 +12,7 @@ export default defineConfig({
       default_title: 'RSS Decks を開く',
     },
     name: 'RSS Decks',
-    version: '1.0.0',
+    version: '1.0.1',
     description: '複数のRSS/Atomフィードをブロック形式で一覧表示します',
   },
   srcDir: 'src',
