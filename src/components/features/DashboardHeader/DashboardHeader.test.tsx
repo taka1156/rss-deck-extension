@@ -16,6 +16,33 @@ describe('DashboardHeader', () => {
   it('renders header with title', () => {
     render(<DashboardHeader {...defaultProps} />);
     expect(screen.getByText('RSS Decks')).toBeInTheDocument();
+    expect(screen.queryByText('DEMO')).not.toBeInTheDocument();
+  });
+
+  it('shows the demo badge beside the title when demo mode is enabled', () => {
+    render(<DashboardHeader {...defaultProps} demoMode />);
+    expect(screen.getByText('DEMO')).toBeInTheDocument();
+  });
+
+  it('opens demo mode after exactly ten logo clicks', async () => {
+    const onDemoMode = vi.fn();
+    render(<DashboardHeader {...defaultProps} onDemoMode={onDemoMode} />);
+    const logo = screen.getByRole('button', { name: 'RSS Decks' });
+    const user = userEvent.setup();
+
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    await user.click(logo);
+    expect(onDemoMode).not.toHaveBeenCalled();
+
+    await user.click(logo);
+    expect(onDemoMode).toHaveBeenCalledOnce();
   });
 
   it('renders all action buttons', () => {

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>好奇心の観察ノート</title>
+    <link>https://example.com/kansatsu</link>
+    <description>小さな緑の場所から届く架空の観察記録です。</description>
+    <item>
+      <title>雨上がりのポケット庭園</title>
+      <link>https://example.com/kansatsu/pocket-garden</link>
+      <guid>https://example.com/kansatsu/pocket-garden</guid>
+      <pubDate>Sun, 04 Oct 2026 06:20:00 GMT</pubDate>
+      <description>葉っぱと雨粒と少しの時間で、小さな庭を想像します。</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>光でできた川をたどって</title>
+      <link>https://example.com/kansatsu/river-of-light</link>
+      <guid>https://example.com/kansatsu/river-of-light</guid>
+      <pubDate>Sat, 03 Oct 2026 04:40:00 GMT</pubDate>
+      <description>水たまりを小さな地図に見立てた、架空の散歩道です。</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>一枚の葉には何色の緑がある？</title>
+      <link>https://example.com/kansatsu/leaf-greens</link>
+      <guid>https://example.com/kansatsu/leaf-greens</guid>
+      <pubDate>Fri, 02 Oct 2026 10:10:00 GMT</pubDate>
+      <description>光の当たる縁と、影になった中心の色を見比べてみます。</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>庭先の雲に名前をつける</title>
+      <link>https://example.com/kansatsu/backyard-clouds</link>
+      <guid>https://example.com/kansatsu/backyard-clouds</guid>
+      <pubDate>Wed, 30 Sep 2026 08:05:00 GMT</pubDate>
+      <description>流れていく雲に、やさしい名前をつけてみる空のガイド。</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+  </channel>
+</rss>

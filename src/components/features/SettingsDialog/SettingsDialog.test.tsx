@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { saveDashboardFlag, saveDashboardState, saveShortcuts } from '@/storage/feedDashboard';
 import { SettingsDialog } from './SettingsDialog';
 
 // Mock storage functions
@@ -150,6 +151,29 @@ describe('SettingsDialog', () => {
     await waitFor(() => {
       expect(handleImport).toHaveBeenCalled();
     });
+  });
+
+  it('does not persist imported settings when persistence is disabled', async () => {
+    const handleImport = vi.fn();
+    render(
+      <SettingsDialog {...defaultProps} open={true} onImport={handleImport} persist={false} />,
+    );
+    const file = new File(
+      [
+        JSON.stringify({
+          feeds: [{ url: 'mock://ja/briefing', title: 'Demo', color: '', group: '' }],
+        }),
+      ],
+      'settings.json',
+      { type: 'application/json' },
+    );
+
+    await userEvent.setup().upload(screen.getByDisplayValue('') as HTMLInputElement, file);
+
+    await waitFor(() => expect(handleImport).toHaveBeenCalled());
+    expect(saveDashboardState).not.toHaveBeenCalled();
+    expect(saveShortcuts).not.toHaveBeenCalled();
+    expect(saveDashboardFlag).not.toHaveBeenCalled();
   });
 
   it('filters out invalid feed items on import', async () => {

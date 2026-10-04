@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { formatFeedDate, parseFeed } from './feedParser';
 
@@ -23,6 +25,7 @@ describe('parseFeed', () => {
         date: 'Mon, 01 Jan 2024 00:00:00 GMT',
         thumb: '',
         audio: '',
+        description: '',
       },
     ]);
   });
@@ -118,6 +121,31 @@ describe('parseFeed', () => {
     expect(() => parseFeed('<html></html>', BASE)).toThrow('XMLを解析できません');
     expect(() => parseFeed('', BASE)).toThrow('XMLを解析できません');
   });
+
+  for (const fixture of [
+    'en/briefing',
+    'en/field-notes',
+    'en/studio',
+    'ja/briefing',
+    'ja/field-notes',
+    'ja/studio',
+  ]) {
+    it(`parses the bundled ${fixture} mock feed and resolves its local artwork`, () => {
+      const xml = readFileSync(
+        resolve(process.cwd(), 'src/public/mock-feeds', `${fixture}.xml`),
+        'utf8',
+      );
+      const base = `chrome-extension://test/mock-feeds/${fixture}.xml`;
+      const { title, items } = parseFeed(xml, base);
+
+      expect(title).not.toBe('(無題)');
+      expect(items).toHaveLength(4);
+      expect(
+        items.every((item) => item.thumb.startsWith('chrome-extension://test/mock-feeds/art/')),
+      ).toBe(true);
+      expect(items.every((item) => item.link.startsWith('https://example.com/'))).toBe(true);
+    });
+  }
 });
 
 describe('formatFeedDate', () => {

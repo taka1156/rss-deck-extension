@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "shortcuts": [
+    {
+      "url": "https://example.com/sky"
+    },
+    {
+      "url": "https://example.com/field-notes"
+    },
+    {
+      "url": "https://example.com/studio"
+    }
+  ],
+  "groups": [
+    {
+      "collapsed": false,
+      "color": "#eb2455",
+      "id": "mupnizrm",
+      "title": "Briefing"
+    },
+    {
+      "collapsed": false,
+      "color": "#2766ec",
+      "id": "mupnbj1e",
+      "title": "Field Notes"
+    },
+    {
+      "collapsed": true,
+      "color": "#8a2be2",
+      "id": "mupnq4k9",
+      "title": "Studio"
+    }
+  ],
+  "feeds": [
+    {
+      "url": "mock://en/briefing",
+      "title": "Pocket Observatory",
+      "color": "#eb2455",
+      "group": "mupnizrm"
+    },
+    {
+      "url": "mock://en/field-notes",
+      "title": "Field Notes for Curious Minds",
+      "color": "#2766ec",
+      "group": "mupnbj1e"
+    },
+    {
+      "url": "mock://en/studio",
+      "title": "The Little Idea Studio",
+      "color": "#8a2be2",
+      "group": "mupnq4k9"
+    }
+  ]
+}

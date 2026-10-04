@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>The Little Idea Studio</title>
+    <link>https://example.com/little-studio</link>
+    <description>Fictional prompts for making a little space for ideas.</description>
+    <item>
+      <title>Make a list of things that hum</title>
+      <link>https://example.com/little-studio/things-that-hum</link>
+      <guid>https://example.com/little-studio/things-that-hum</guid>
+      <pubDate>Sun, 04 Oct 2026 02:25:00 GMT</pubDate>
+      <description>A tiny creative prompt: collect the soft sounds around you.</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>Draw tomorrow as a small island</title>
+      <link>https://example.com/little-studio/small-island</link>
+      <guid>https://example.com/little-studio/small-island</guid>
+      <pubDate>Fri, 02 Oct 2026 03:30:00 GMT</pubDate>
+      <description>Sketch a welcoming place for one good idea to land.</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>One minute, one imaginary map</title>
+      <link>https://example.com/little-studio/imaginary-map</link>
+      <guid>https://example.com/little-studio/imaginary-map</guid>
+      <pubDate>Thu, 01 Oct 2026 11:00:00 GMT</pubDate>
+      <description>Connect three familiar places with a route that does not exist.</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>Leave a blank page for later</title>
+      <link>https://example.com/little-studio/blank-page</link>
+      <guid>https://example.com/little-studio/blank-page</guid>
+      <pubDate>Tue, 29 Sep 2026 06:50:00 GMT</pubDate>
+      <description>Sometimes a little open space is the best place to begin.</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+  </channel>
+</rss>

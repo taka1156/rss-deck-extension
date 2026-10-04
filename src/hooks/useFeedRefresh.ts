@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Feed } from '@/storage/feedDashboard';
 import { parseFeed } from '@/utils/feedParser';
+import { getDemoArticleUrl, getMockFeedKey, getMockFeedUrl } from '@/utils/mockFeed';
 
 function retryAfter(response: Response): string {
   const value = response.headers.get('Retry-After');
@@ -20,6 +21,17 @@ const MAX_WAIT_MS = 10000;
 const REQUEST_GAP_MS = 300;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function getFeedSource(url: string): {
+  fetchUrl: string;
+  parseBase: string;
+  mockFeedKey: string | null;
+} {
+  const mockFeedKey = getMockFeedKey(url);
+  if (!mockFeedKey) return { fetchUrl: url, parseBase: url, mockFeedKey: null };
+  const feedUrl = getMockFeedUrl(mockFeedKey);
+  return { fetchUrl: feedUrl, parseBase: feedUrl, mockFeedKey };
+}
 
 function retryWaitMs(response: Response, attempt: number): number {
   const value = response.headers.get('Retry-After');
@@ -66,12 +78,20 @@ export function useFeedRefresh(
     setStatusByUrl((prev) => ({ ...prev, [key]: { loading: true, error: null } }));
 
     try {
-      const response = await fetchWithRetry(feed.url);
+      const source = getFeedSource(feed.url);
+      const response = await fetchWithRetry(source.fetchUrl);
       if (!response.ok) {
         const retryHint = response.status === 429 ? retryAfter(response) : '';
         throw new Error(`HTTP ${response.status}${retryHint}`);
       }
-      const { title, items } = parseFeed(await response.text(), feed.url);
+      const { title, items: parsedItems } = parseFeed(await response.text(), source.parseBase);
+      const mockFeedKey = source.mockFeedKey;
+      const items = mockFeedKey
+        ? parsedItems.map((item) => ({
+            ...item,
+            link: getDemoArticleUrl(mockFeedKey, item.link),
+          }))
+        : parsedItems;
       setItemsByUrl((prev) => ({ ...prev, [key]: items }));
 
       if (title && !feed.title) {

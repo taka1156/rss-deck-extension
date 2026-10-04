@@ -16,6 +16,8 @@ type SettingsDialogProps = {
   open: boolean;
   onOpenChange: (nextOpen: boolean) => void;
   onImport: (nextState: DashboardState) => void | Promise<void>;
+  persist?: boolean;
+  state?: DashboardState;
 };
 
 function isDashboardState(value: unknown): value is Partial<DashboardState> {
@@ -29,22 +31,28 @@ function isDashboardState(value: unknown): value is Partial<DashboardState> {
   );
 }
 
-export function SettingsDialog({ open, onOpenChange, onImport }: SettingsDialogProps) {
+export function SettingsDialog({
+  open,
+  onOpenChange,
+  onImport,
+  persist = true,
+  state,
+}: SettingsDialogProps) {
   const { t } = useTranslation();
   const closeDialog = () => {
     onOpenChange(false);
   };
 
   const handleExport = useCallback(async () => {
-    const state = await loadDashboardState();
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const exportState = state ?? (await loadDashboardState());
+    const blob = new Blob([JSON.stringify(exportState, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.download = 'rss-decks-settings.json';
     link.click();
     URL.revokeObjectURL(url);
-  }, []);
+  }, [state]);
 
   const handleImport = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,9 +138,11 @@ export function SettingsDialog({ open, onOpenChange, onImport }: SettingsDialogP
           sideOpen: typeof parsed.sideOpen === 'boolean' ? parsed.sideOpen : true,
         };
 
-        await saveDashboardState(nextState.feeds, nextState.groups);
-        await saveShortcuts(nextState.shortcuts);
-        await saveDashboardFlag('sideOpen', nextState.sideOpen);
+        if (persist) {
+          await saveDashboardState(nextState.feeds, nextState.groups);
+          await saveShortcuts(nextState.shortcuts);
+          await saveDashboardFlag('sideOpen', nextState.sideOpen);
+        }
 
         await onImport(nextState);
         event.target.value = '';
@@ -142,7 +152,7 @@ export function SettingsDialog({ open, onOpenChange, onImport }: SettingsDialogP
         event.target.value = '';
       }
     },
-    [onImport, onOpenChange, t],
+    [onImport, onOpenChange, persist, t],
   );
 
   return (

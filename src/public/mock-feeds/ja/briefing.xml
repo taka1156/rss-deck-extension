@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>小さな星空便り</title>
+    <link>https://example.com/hoshizora</link>
+    <description>空を見上げるための架空の観察メモです。</description>
+    <item>
+      <title>夕暮れの空に見つけた小さな光</title>
+      <link>https://example.com/hoshizora/evening-light</link>
+      <guid>https://example.com/hoshizora/evening-light</guid>
+      <pubDate>Sun, 04 Oct 2026 08:30:00 GMT</pubDate>
+      <description>日が沈むころ、空の色が変わる様子をゆっくり眺めます。</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+    <item>
+      <title>月のかたちを一週間記録してみる</title>
+      <link>https://example.com/hoshizora/moon-shapes</link>
+      <guid>https://example.com/hoshizora/moon-shapes</guid>
+      <pubDate>Sat, 03 Oct 2026 07:15:00 GMT</pubDate>
+      <description>夜ごとの月の輪郭を、手帳のすみに描いてみましょう。</description>
+      <media:thumbnail url="../art/moon-garden.svg" />
+    </item>
+    <item>
+      <title>朝いちばんに見つける三つのこと</title>
+      <link>https://example.com/hoshizora/three-at-dawn</link>
+      <guid>https://example.com/hoshizora/three-at-dawn</guid>
+      <pubDate>Fri, 02 Oct 2026 05:00:00 GMT</pubDate>
+      <description>いつもの道を少しゆっくり歩くための架空のチェックリスト。</description>
+      <media:thumbnail url="../art/blue-hour.svg" />
+    </item>
+    <item>
+      <title>晴れた空の青を集める</title>
+      <link>https://example.com/hoshizora/sky-colors</link>
+      <guid>https://example.com/hoshizora/sky-colors</guid>
+      <pubDate>Thu, 01 Oct 2026 09:45:00 GMT</pubDate>
+      <description>淡い水色から深い藍色まで、想像の色見本を作ります。</description>
+      <media:thumbnail url="../art/orbit.svg" />
+    </item>
+  </channel>
+</rss>
