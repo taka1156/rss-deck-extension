@@ -42,6 +42,7 @@ describe('FeedBoard', () => {
     itemsByUrl: {},
     onOpenArticle: vi.fn(() => true),
     onPlayAudio: vi.fn(),
+    onGrantAccess: vi.fn(),
     onUpdateFeed: vi.fn(() => true),
     onUpdateGroup: vi.fn(),
     onRemoveFeed: vi.fn(() => Promise.resolve({ ok: true })),

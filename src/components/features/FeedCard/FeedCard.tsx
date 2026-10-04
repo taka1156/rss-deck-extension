@@ -26,10 +26,11 @@ import {
 type FeedCardProps = {
   feed: Feed;
   groupId?: string;
-  status?: { loading?: boolean; error?: string | null };
+  status?: { loading?: boolean; error?: string | null; needsPermission?: boolean };
   items?: FeedItem[];
   onOpenArticle: (title: string, url: string) => boolean;
   onPlayAudio: (title: string, url: string) => void;
+  onGrantAccess: (url: string) => void;
   onRemove: (url: string) => void;
   onUpdate: (url: string, patch: EditValues) => boolean;
   onDragStart: (event: React.DragEvent<HTMLElement>, feed: Feed) => void;
@@ -43,6 +44,7 @@ export function FeedCard({
   items = [],
   onOpenArticle,
   onPlayAudio,
+  onGrantAccess,
   onRemove,
   onUpdate,
   onDragStart,
@@ -140,6 +142,11 @@ export function FeedCard({
       {statusText && (
         <div className={`${status} ${feedStatus?.error ? errorStatus : ''}`.trim()}>
           {statusText}
+          {feedStatus?.needsPermission && (
+            <button type="button" onClick={() => onGrantAccess(feed.url)}>
+              {t('feed.grantAccess')}
+            </button>
+          )}
         </div>
       )}
       {items.length > 0 && (

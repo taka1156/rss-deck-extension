@@ -180,6 +180,12 @@ export default function Feed() {
           return true;
         }}
         onPlayAudio={(label, url) => setAudio({ label, url })}
+        onGrantAccess={(url) => {
+          void requestHostAccess([url]).then((granted) => {
+            const target = feedState.feeds.find((feed) => feed.url === url);
+            if (granted && target) void feedRefresh.refreshFeed(target);
+          });
+        }}
         onRemoveFeed={async (url) => {
           const result = feedState.removeFeed(url);
           if (result.ok) {
