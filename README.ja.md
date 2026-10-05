@@ -11,11 +11,11 @@
 1. このリポジトリをローカルに配置します。
 2. 依存パッケージをインストールします。
    ```sh
-   npm install
+   yarn install
    ```
 3. Chromium ターゲット向けにビルドします。
    ```sh
-   npm run build
+   yarn run build
    ```
 4. Chromeで `chrome://extensions` を開きます。
 5. 「デベロッパー モード」を有効にします。

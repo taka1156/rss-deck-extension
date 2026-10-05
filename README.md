@@ -11,11 +11,11 @@ A Chrome extension for organizing multiple RSS/Atom feeds into blocks. View arti
 1. Clone this repository locally.
 2. Install the dependencies.
    ```sh
-   npm install
+   yarn install
    ```
 3. Build for the Chromium target.
    ```sh
-   npm run build
+   yarn run build
    ```
 4. Open `chrome://extensions` in Chrome.
 5. Enable **Developer mode**.
