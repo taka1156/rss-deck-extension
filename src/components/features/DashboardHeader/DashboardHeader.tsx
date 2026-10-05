@@ -1,13 +1,12 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import iconUrl from '@/assets/icon.png';
+import { BrandLogo } from '@/components/features/BrandLogo/BrandLogo';
 import { LanguageMenu } from '@/components/features/LanguageMenu/LanguageMenu';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
-import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
 import { BaseInput } from '@/components/shared/BaseInput/BaseInput';
 import { BaseLabel } from '@/components/shared/BaseLabel/BaseLabel';
 import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
-import { brand, brandIcon, demoBadge, header, title, tools } from './DashboardHeader.css';
+import { header, tools } from './DashboardHeader.css';
 
 type DashboardHeaderProps = {
   // Omit the dashboard handlers to render the minimal header used by the help page.
@@ -66,17 +65,7 @@ export function DashboardHeader({
 
   return (
     <header className={header}>
-      <button className={brand} type="button" aria-label="RSS Decks" onClick={handleLogoClick}>
-        <img className={brandIcon} src={iconUrl} alt="RSS Decks Logo" />
-        <BaseHeading hLv="1" className={title}>
-          RSS Decks
-        </BaseHeading>
-        {demoMode && (
-          <span className={demoBadge} aria-hidden="true">
-            DEMO
-          </span>
-        )}
-      </button>
+      <BrandLogo demoMode={demoMode} onClick={handleLogoClick} />
       <div className={tools}>
         {isDashboard && (
           <>
