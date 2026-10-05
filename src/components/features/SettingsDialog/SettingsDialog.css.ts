@@ -8,8 +8,5 @@ export const settingsBody = style({
 });
 
 export const importSettings = style({
-  display: 'flex',
-  flexDirection: 'column',
   gap: '8px',
-  fontSize: '13px',
 });

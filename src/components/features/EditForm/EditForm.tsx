@@ -1,7 +1,9 @@
 import { type FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
-import { buttons, colorInput, colorRow, form, label } from './EditForm.css';
+import { BaseInput } from '@/components/shared/BaseInput/BaseInput';
+import { BaseLabel } from '@/components/shared/BaseLabel/BaseLabel';
+import { buttons, colorInput, colorRow, form } from './EditForm.css';
 
 export type EditValues = { title: string; url: string; color: string };
 
@@ -38,32 +40,35 @@ export function EditForm({
 
   return (
     <form className={form} onSubmit={handleSubmit}>
-      <label className={label}>
+      <BaseLabel htmlFor="editTitle">
         {titleLabel}
-        <input
+        <BaseInput
+          id="editTitle"
           name="title"
           value={title}
           placeholder={titlePlaceholder}
           required={titleRequired}
           onChange={(event) => setTitle(event.target.value)}
         />
-      </label>
+      </BaseLabel>
       {showUrl && (
-        <label className={label}>
+        <BaseLabel htmlFor="editUrl">
           URL
-          <input
+          <BaseInput
+            id="editUrl"
             name="url"
             type="url"
             value={url}
             required
             onChange={(event) => setUrl(event.target.value)}
           />
-        </label>
+        </BaseLabel>
       )}
-      <label className={label}>
+      <BaseLabel htmlFor="editColor">
         {t('edit.borderColor')}
         <span className={colorRow}>
-          <input
+          <BaseInput
+            id="editColor"
             className={colorInput}
             name="color"
             type="color"
@@ -84,7 +89,7 @@ export function EditForm({
             {t('edit.reset')}
           </BaseButton>
         </span>
-      </label>
+      </BaseLabel>
       <div className={buttons}>
         <BaseButton type="submit">{t('edit.save')}</BaseButton>
         <BaseButton type="button" variant="secondary" onClick={onCancel}>

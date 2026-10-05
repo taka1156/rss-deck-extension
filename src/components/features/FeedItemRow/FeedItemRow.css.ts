@@ -25,9 +25,7 @@ export const itemBody = style({
 });
 
 export const itemLink = style({
-  color: 'inherit',
   fontSize: '13px',
-  textDecoration: 'none',
   wordBreak: 'break-word',
 });
 
@@ -38,6 +36,4 @@ export const itemDate = style({
 
 export const itemStatus = style({
   padding: '2px 8px',
-  color: 'var(--muted)',
-  fontSize: '16px',
 });

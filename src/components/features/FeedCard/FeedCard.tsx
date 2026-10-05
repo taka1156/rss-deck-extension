@@ -1,6 +1,11 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FeedItemRow } from '@/components/features/FeedItemRow/FeedItemRow';
+import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
+import { BaseList } from '@/components/shared/BaseList/BaseList';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import { useCardDragState } from '@/hooks/useCardDragState';
 import { useColorPreview } from '@/hooks/useColorPreview';
 import { useEditState } from '@/hooks/useEditState';
@@ -14,13 +19,10 @@ import {
   dragging,
   errorStatus,
   handle,
-  icon,
   itemList,
   removeIcon,
   status,
-  subtitle,
   title,
-  titleText,
 } from './FeedCard.css';
 
 type FeedCardProps = {
@@ -73,7 +75,7 @@ export function FeedCard({
 
   return (
     <li
-      className={`${block} ${isDragging ? dragging : ''}`.trim()}
+      className={clsx(block, isDragging && dragging)}
       style={borderColor ? { borderColor } : undefined}
       draggable={dragReady}
       onDragStart={(event) => {
@@ -103,27 +105,30 @@ export function FeedCard({
         >
           ⠿
         </span>
-        <h2 className={title}>
-          <span className={titleText}>{feed.title || feed.url}</span>
-          <small className={subtitle}>{feed.url}</small>
-        </h2>
+        <BaseHeading hLv="2" className={title}>
+          <BaseText as="span" truncate>
+            {feed.title || feed.url}
+          </BaseText>
+          <BaseText as="small" color="muted" size="tiny" weight="regular" truncate>
+            {feed.url}
+          </BaseText>
+        </BaseHeading>
         <div className={actions}>
-          <button
-            type="button"
-            className={icon}
+          <BaseButton
+            variant="ghost"
             title={t('common.edit')}
             onClick={() => (editing ? closeEdit() : setEditing(true))}
           >
             ✎
-          </button>
-          <button
-            type="button"
-            className={`${icon} ${removeIcon}`}
+          </BaseButton>
+          <BaseButton
+            variant="ghost"
+            className={removeIcon}
             title={t('common.delete')}
             onClick={() => onRemove(feed.url)}
           >
             ×
-          </button>
+          </BaseButton>
         </div>
       </div>
       {editing && (
@@ -140,17 +145,15 @@ export function FeedCard({
         />
       )}
       {statusText && (
-        <div className={`${status} ${feedStatus?.error ? errorStatus : ''}`.trim()}>
+        <div className={clsx(status, feedStatus?.error && errorStatus)}>
           {statusText}
           {feedStatus?.needsPermission && (
-            <button type="button" onClick={() => onGrantAccess(feed.url)}>
-              {t('feed.grantAccess')}
-            </button>
+            <BaseButton onClick={() => onGrantAccess(feed.url)}>{t('feed.grantAccess')}</BaseButton>
           )}
         </div>
       )}
       {items.length > 0 && (
-        <ul className={itemList}>
+        <BaseList className={itemList}>
           {items.map((item) => (
             <FeedItemRow
               key={item.link || `${item.title}-${item.date}`}
@@ -161,7 +164,7 @@ export function FeedCard({
               onPlayAudio={handlePlayAudio}
             />
           ))}
-        </ul>
+        </BaseList>
       )}
     </li>
   );

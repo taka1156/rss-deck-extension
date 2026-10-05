@@ -46,10 +46,6 @@ export const audioBar = style({
 export const audioTitle = style({
   flex: 1,
   minWidth: 0,
-  fontSize: '13px',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
 });
 
 export const player = style({
@@ -74,10 +70,6 @@ export const paneHead = style({
 export const articleTitle = style({
   flex: 1,
   minWidth: 0,
-  fontSize: '13px',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
 });
 
 export const articleFrame = style({

@@ -43,7 +43,6 @@ export const eyebrow = style({
 });
 
 export const heroTitle = style({
-  margin: 0,
   maxWidth: '660px',
   fontSize: 'clamp(2.5rem, 6vw, 4.6rem)',
   lineHeight: 1.05,
@@ -55,7 +54,6 @@ export const lead = style({
   margin: '18px 0 0',
   fontSize: '1.08rem',
   lineHeight: 1.9,
-  color: 'var(--text-soft)',
 });
 
 export const heroActions = style({
@@ -78,7 +76,6 @@ export const button = style({
   padding: '0 22px',
   borderRadius: '999px',
   fontWeight: 700,
-  textDecoration: 'none',
   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
   selectors: {
     '&:hover': {
@@ -105,12 +102,10 @@ export const buttonSecondary = style({
 });
 
 export const metrics = style({
-  listStyle: 'none',
   display: 'grid',
   gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
   gap: '18px',
   margin: '30px 0 0',
-  padding: 0,
   '@media': {
     '(max-width: 900px)': {
       gridTemplateColumns: '1fr 1fr',
@@ -134,10 +129,6 @@ export const metricsStrong = style({
   marginBottom: '6px',
 });
 
-export const metricsText = style({
-  color: 'var(--text-soft)',
-});
-
 export const section = style({
   paddingTop: '72px',
 });
@@ -151,7 +142,6 @@ export const sectionHeader = style({
 });
 
 export const sectionTitle = style({
-  margin: 0,
   fontSize: 'clamp(2rem, 3vw, 2.7rem)',
   lineHeight: 1.2,
   letterSpacing: '-0.04em',
@@ -197,8 +187,6 @@ export const featureCardTitle = style({
 });
 
 export const bodyText = style({
-  margin: 0,
-  color: 'var(--text-soft)',
   lineHeight: 1.8,
 });
 
@@ -254,7 +242,6 @@ export const callout = style({
 });
 
 export const calloutTitle = style({
-  margin: 0,
   fontSize: 'clamp(1.7rem, 2.4vw, 2.3rem)',
   letterSpacing: '-0.04em',
 });

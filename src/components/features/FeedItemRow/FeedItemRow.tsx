@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import { type FeedItem, formatFeedDate } from '@/utils/feedParser';
-import { icon } from '../FeedCard/FeedCard.css';
 import { itemBody, itemDate, itemLink, itemRow, itemStatus, itemThumb } from './FeedItemRow.css';
 
 type FeedItemRowProps = {
@@ -23,33 +25,34 @@ export function FeedItemRow({
     <li className={itemRow} key={item.link || `${item.title}-${item.date}`}>
       {item.thumb && <img className={itemThumb} src={item.thumb} alt="" loading="lazy" />}
       <div className={itemBody}>
-        <a
+        <BaseLink
           className={itemLink}
           href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
           onClick={(event) => {
             if (!item.link) return;
             if (onOpenArticle(item.title, item.link)) event.preventDefault();
           }}
         >
           {item.title || item.link || t('common.untitled')}
-        </a>
-        {isArticleOpen && <span className={itemStatus}>{t('item.viewing')}</span>}
+        </BaseLink>
+        {isArticleOpen && (
+          <BaseText as="span" color="muted" size="medium" className={itemStatus}>
+            {t('item.viewing')}
+          </BaseText>
+        )}
         {formatFeedDate(item.date) && (
           <time className={itemDate} dateTime={item.date}>
             {formatFeedDate(item.date)}
           </time>
         )}
         {item.audio && (
-          <button
-            type="button"
-            className={icon}
+          <BaseButton
+            variant="ghost"
             title={isAudioPlaying ? t('item.playing') : t('item.play')}
             onClick={() => onPlayAudio(item.title, item.audio)}
           >
             {isAudioPlaying ? '⏸' : '▶'} {isAudioPlaying && t('item.playing')}
-          </button>
+          </BaseButton>
         )}
       </div>
     </li>

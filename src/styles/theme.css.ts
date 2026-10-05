@@ -64,18 +64,10 @@ globalStyle('button, a', {
   font: 'inherit',
 });
 
-globalStyle('button, input', {
+globalStyle('button', {
   font: 'inherit',
 });
 
 globalStyle('button', {
   cursor: 'pointer',
-});
-
-globalStyle('input', {
-  padding: '8px 12px',
-  border: '1px solid var(--line)',
-  borderRadius: '8px',
-  background: 'var(--card)',
-  color: 'var(--text)',
 });

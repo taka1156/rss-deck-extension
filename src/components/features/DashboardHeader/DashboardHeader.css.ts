@@ -8,55 +8,9 @@ export const header = style({
   padding: '16px 24px',
 });
 
-export const brand = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px',
-  padding: 0,
-  border: 0,
-  background: 'transparent',
-  color: 'inherit',
-  textAlign: 'left',
-  cursor: 'pointer',
-});
-
-export const brandIcon = style({
-  width: '28px',
-  height: '28px',
-});
-
-export const title = style({
-  margin: 0,
-  fontSize: '20px',
-});
-
-export const demoBadge = style({
-  marginLeft: '4px',
-  padding: '3px 7px',
-  borderRadius: '999px',
-  background: '#fff0c2',
-  color: '#7a4b00',
-  fontSize: '10px',
-  fontWeight: 800,
-  letterSpacing: '0.08em',
-  lineHeight: 1.2,
-});
-
 export const tools = style({
   display: 'flex',
   gap: '8px',
   alignItems: 'center',
   flexWrap: 'wrap',
-});
-
-export const checkLabel = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
-  fontSize: '13px',
-  cursor: 'pointer',
-});
-
-export const helpLink = style({
-  textDecoration: 'none',
 });
