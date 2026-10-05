@@ -32,17 +32,8 @@ export const handle = style({
   cursor: 'grab',
 });
 
-export const toggle = style({
-  border: '0',
-  background: 'transparent',
-  color: 'var(--muted)',
-  fontSize: '16px',
-  cursor: 'pointer',
-});
-
 export const groupTitle = style({
   flex: 1,
-  margin: 0,
   fontSize: '16px',
 });
 
@@ -52,20 +43,7 @@ export const actions = style({
   marginLeft: 'auto',
 });
 
-export const icon = style({
-  border: '0',
-  background: 'transparent',
-  color: 'var(--muted)',
-  cursor: 'pointer',
-  fontSize: '16px',
-  ':hover': {
-    color: 'var(--accent)',
-  },
-});
-
 export const feedList = style({
-  listStyle: 'none',
-  margin: 0,
   padding: '0 14px 14px',
   display: 'flex',
   flexWrap: 'wrap',

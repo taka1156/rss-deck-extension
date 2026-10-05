@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import type { ButtonHTMLAttributes } from 'react';
-import { baseButton, buttonIcon, buttonSub } from './BaseButton.css';
+import { baseButton, buttonGhost, buttonIcon, buttonMenuItem, buttonSub } from './BaseButton.css';
 
 type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'default' | 'secondary' | 'icon';
+  variant?: 'default' | 'secondary' | 'icon' | 'ghost' | 'menuItem';
 };
 
 export function BaseButton({
@@ -11,8 +12,14 @@ export function BaseButton({
   variant = 'default',
   ...props
 }: BaseButtonProps) {
-  const variantClass = variant === 'secondary' ? buttonSub : variant === 'icon' ? buttonIcon : '';
-  const classes = [baseButton, variantClass, className].filter(Boolean).join(' ');
+  const classes = clsx(
+    baseButton,
+    variant === 'secondary' && buttonSub,
+    variant === 'icon' && buttonIcon,
+    variant === 'ghost' && buttonGhost,
+    variant === 'menuItem' && buttonMenuItem,
+    className,
+  );
 
-  return <button className={classes || undefined} type={type} {...props} />;
+  return <button className={classes} type={type} {...props} />;
 }

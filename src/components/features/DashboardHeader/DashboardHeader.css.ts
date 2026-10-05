@@ -26,7 +26,6 @@ export const brandIcon = style({
 });
 
 export const title = style({
-  margin: 0,
   fontSize: '20px',
 });
 
@@ -47,16 +46,4 @@ export const tools = style({
   gap: '8px',
   alignItems: 'center',
   flexWrap: 'wrap',
-});
-
-export const checkLabel = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
-  fontSize: '13px',
-  cursor: 'pointer',
-});
-
-export const helpLink = style({
-  textDecoration: 'none',
 });

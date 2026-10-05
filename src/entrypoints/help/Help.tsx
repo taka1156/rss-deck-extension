@@ -1,5 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { BaseList } from '@/components/shared/BaseList/BaseList';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import '@/styles/theme.css';
+import clsx from 'clsx';
 import { CopyrightFooter } from '@/components/features/CopyrightFooter/CopyrightFooter';
 import { DashboardHeader } from '@/components/features/DashboardHeader/DashboardHeader';
 import * as styles from './Help.css';
@@ -62,41 +67,65 @@ export default function Help() {
       <main className={styles.helpPage}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-            <p className={styles.eyebrow}>RSS Decks</p>
-            <h1 className={styles.heroTitle}>{t('help.heroTitle')}</h1>
-            <p className={styles.lead}>{t('help.lead')}</p>
+            <BaseText className={styles.eyebrow}>RSS Decks</BaseText>
+            <BaseHeading hLv="1" className={styles.heroTitle}>
+              {t('help.heroTitle')}
+            </BaseHeading>
+            <BaseText color="soft" className={styles.lead}>
+              {t('help.lead')}
+            </BaseText>
             <div className={styles.heroActions}>
-              <a href="#how-to-use" className={`${styles.button} ${styles.buttonPrimary}`}>
+              <BaseLink
+                external={false}
+                href="#how-to-use"
+                className={clsx(styles.button, styles.buttonPrimary)}
+              >
                 {t('help.toHowTo')}
-              </a>
-              <a href="#features" className={`${styles.button} ${styles.buttonSecondary}`}>
+              </BaseLink>
+              <BaseLink
+                external={false}
+                href="#features"
+                className={clsx(styles.button, styles.buttonSecondary)}
+              >
                 {t('help.toFeatures')}
-              </a>
-              <a href="/feed.html" className={`${styles.button} ${styles.buttonSecondary}`}>
+              </BaseLink>
+              <BaseLink
+                external={false}
+                href="/feed.html"
+                className={clsx(styles.button, styles.buttonSecondary)}
+              >
                 {t('help.toDashboard')}
-              </a>
+              </BaseLink>
             </div>
-            <ul className={styles.metrics} aria-label={t('help.metricsLabel')}>
+            <BaseList className={styles.metrics} aria-label={t('help.metricsLabel')}>
               <li className={styles.metricsItem}>
                 <strong className={styles.metricsStrong}>{t('help.metrics.0.title')}</strong>
-                <span className={styles.metricsText}>{t('help.metrics.0.text')}</span>
+                <BaseText as="span" color="soft">
+                  {t('help.metrics.0.text')}
+                </BaseText>
               </li>
               <li className={styles.metricsItem}>
                 <strong className={styles.metricsStrong}>{t('help.metrics.1.title')}</strong>
-                <span className={styles.metricsText}>{t('help.metrics.1.text')}</span>
+                <BaseText as="span" color="soft">
+                  {t('help.metrics.1.text')}
+                </BaseText>
               </li>
               <li className={styles.metricsItem}>
                 <strong className={styles.metricsStrong}>{t('help.metrics.2.title')}</strong>
-                <span className={styles.metricsText}>{t('help.metrics.2.text')}</span>
+                <BaseText as="span" color="soft">
+                  {t('help.metrics.2.text')}
+                </BaseText>
               </li>
-            </ul>
+            </BaseList>
           </div>
         </section>
 
         <section id="features" className={styles.section}>
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Features</p>
-            <h2 className={styles.sectionTitle}>{t('help.featuresTitle')}</h2>
+            <BaseText className={styles.eyebrow}>Features</BaseText>
+            <BaseHeading hLv="2" className={styles.sectionTitle}>
+              {t('help.featuresTitle')}
+            </BaseHeading>
           </div>
           <div className={styles.featureGrid}>
             {features.map((feature) => (
@@ -104,24 +133,34 @@ export default function Help() {
                 <div className={styles.featureCardBadge} aria-hidden="true">
                   ✓
                 </div>
-                <h3 className={styles.featureCardTitle}>{feature.title}</h3>
-                <p className={styles.bodyText}>{feature.description}</p>
+                <BaseHeading hLv="3" className={styles.featureCardTitle}>
+                  {feature.title}
+                </BaseHeading>
+                <BaseText color="soft" className={styles.bodyText}>
+                  {feature.description}
+                </BaseText>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="how-to-use" className={`${styles.section} ${styles.sectionAlt}`}>
+        <section id="how-to-use" className={clsx(styles.section, styles.sectionAlt)}>
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>How to use</p>
-            <h2 className={styles.sectionTitle}>{t('help.howToTitle')}</h2>
+            <BaseText className={styles.eyebrow}>How to use</BaseText>
+            <BaseHeading hLv="2" className={styles.sectionTitle}>
+              {t('help.howToTitle')}
+            </BaseHeading>
           </div>
           <div className={styles.steps}>
             {steps.map((step) => (
               <div key={step.label} className={styles.step}>
                 <span className={styles.stepLabel}>{step.label}</span>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.bodyText}>{step.text}</p>
+                <BaseHeading hLv="3" className={styles.stepTitle}>
+                  {step.title}
+                </BaseHeading>
+                <BaseText color="soft" className={styles.bodyText}>
+                  {step.text}
+                </BaseText>
               </div>
             ))}
           </div>
@@ -130,22 +169,30 @@ export default function Help() {
         <section className={styles.section}>
           <div className={styles.callout}>
             <div>
-              <p className={styles.eyebrow}>Quick actions</p>
-              <h2 className={styles.calloutTitle}>{t('help.quickTitle')}</h2>
+              <BaseText className={styles.eyebrow}>Quick actions</BaseText>
+              <BaseHeading hLv="2" className={styles.calloutTitle}>
+                {t('help.quickTitle')}
+              </BaseHeading>
             </div>
             <div className={styles.actionList}>
               {quickActions.map((action) => (
                 <div key={action.name} className={styles.actionItem}>
                   <span className={styles.actionItemName}>{action.name}</span>
-                  <small className={styles.bodyText}>{action.note}</small>
+                  <BaseText as="small" color="soft" className={styles.bodyText}>
+                    {action.note}
+                  </BaseText>
                 </div>
               ))}
             </div>
           </div>
           <div className={styles.heroActions}>
-            <a href="/feed.html" className={`${styles.button} ${styles.buttonPrimary}`}>
+            <BaseLink
+              external={false}
+              href="/feed.html"
+              className={clsx(styles.button, styles.buttonPrimary)}
+            >
               {t('help.toDashboard')}
-            </a>
+            </BaseLink>
           </div>
         </section>
       </main>

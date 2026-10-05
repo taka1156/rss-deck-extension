@@ -11,12 +11,6 @@ export const form = style({
   color: 'var(--muted)',
 });
 
-export const label = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '4px',
-});
-
 export const colorRow = style({
   display: 'flex',
   gap: '8px',

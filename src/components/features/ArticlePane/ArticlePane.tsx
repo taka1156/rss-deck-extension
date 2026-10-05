@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import {
   articleFrame,
   articleTitle,
@@ -94,9 +95,9 @@ export function ArticlePane({
       />
       {audioUrl && (
         <div id="audioBar" className={audioBar}>
-          <span id="audioTitle" className={audioTitle}>
+          <BaseText as="span" id="audioTitle" size="compact" truncate className={audioTitle}>
             {audioLabel}
-          </span>
+          </BaseText>
           <BaseButton
             id="audioClose"
             type="button"
@@ -120,9 +121,9 @@ export function ArticlePane({
       {url && (
         <div id="articleWrap" className={articleWrap}>
           <div className={paneHead}>
-            <span id="articleTitle" className={articleTitle}>
+            <BaseText as="span" id="articleTitle" size="compact" truncate className={articleTitle}>
               {title || url}
-            </span>
+            </BaseText>
             <BaseButton
               id="articleOpen"
               type="button"

@@ -24,3 +24,29 @@ export const buttonIcon = style({
   padding: '4px 8px',
   borderRadius: '6px',
 });
+
+export const buttonGhost = style({
+  padding: '2px 8px',
+  border: 0,
+  background: 'transparent',
+  color: 'var(--muted)',
+  fontSize: '16px',
+  ':hover': {
+    color: 'var(--accent)',
+  },
+});
+
+export const buttonMenuItem = style({
+  display: 'block',
+  width: '100%',
+  padding: '8px 12px',
+  border: 0,
+  borderRadius: '6px',
+  background: 'transparent',
+  color: 'inherit',
+  fontSize: '13px',
+  textAlign: 'left',
+  ':hover': {
+    background: 'var(--line)',
+  },
+});

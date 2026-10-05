@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
-import { menu, menuItem, menuItemActive, root } from './LanguageMenu.css';
+import { menu, menuItemActive, root } from './LanguageMenu.css';
 
 const LANGUAGES = ['ja', 'en'] as const;
 
@@ -44,20 +44,20 @@ export function LanguageMenu() {
           {LANGUAGES.map((lang) => {
             const active = i18n.language.startsWith(lang);
             return (
-              <button
+              <BaseButton
                 key={lang}
-                type="button"
+                variant="menuItem"
                 role="menuitemradio"
                 aria-checked={active}
                 lang={lang}
-                className={`${menuItem} ${active ? menuItemActive : ''}`.trim()}
+                className={active ? menuItemActive : undefined}
                 onClick={() => {
                   void i18n.changeLanguage(lang);
                   setOpen(false);
                 }}
               >
                 {t(`header.language.${lang}`)}
-              </button>
+              </BaseButton>
             );
           })}
         </div>

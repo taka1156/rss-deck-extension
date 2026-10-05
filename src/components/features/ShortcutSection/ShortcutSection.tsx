@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import {
   entry,
   fallback,
@@ -25,13 +28,7 @@ function ShortcutEntry({ url, onRemove }: { url: string; onRemove: (url: string)
 
   return (
     <div className={entry}>
-      <a
-        className={link}
-        href={parsed.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={parsed.href}
-      >
+      <BaseLink className={link} href={parsed.href} title={parsed.href}>
         {iconFailed ? (
           <span className={fallback}>{hostname.charAt(0).toUpperCase()}</span>
         ) : (
@@ -43,7 +40,7 @@ function ShortcutEntry({ url, onRemove }: { url: string; onRemove: (url: string)
           />
         )}
         <span>{hostname}</span>
-      </a>
+      </BaseLink>
       <button
         type="button"
         className={removeButton}
@@ -67,13 +64,13 @@ export function ShortcutSection({ shortcuts, onRemoveShortcut }: ShortcutSection
   return (
     <section id="shortcuts" className={section} aria-labelledby="shortcutsTitle">
       <div className={toolbar}>
-        <h2 id="shortcutsTitle" className={toolbarTitle}>
+        <BaseHeading hLv="2" id="shortcutsTitle" className={toolbarTitle}>
           {t('shortcut.title')}
-        </h2>
+        </BaseHeading>
       </div>
       <div id="shortcutList" className={list}>
         {shortcuts.length === 0 ? (
-          <span>{t('shortcut.empty')}</span>
+          <BaseText as="span">{t('shortcut.empty')}</BaseText>
         ) : (
           shortcuts.map((shortcut) => (
             <ShortcutEntry key={shortcut.url} url={shortcut.url} onRemove={onRemoveShortcut} />

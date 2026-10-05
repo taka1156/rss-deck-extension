@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { BaseHeading } from '@/components/shared/BaseHeading/BaseHeading';
+import { BaseLink } from '@/components/shared/BaseLink/BaseLink';
+import { BaseText } from '@/components/shared/BaseText/BaseText';
 import { type FeedItem, parseFeed } from '@/utils/feedParser';
 import { getMockFeedKey, getMockFeedUrl } from '@/utils/mockFeed';
 import * as styles from './demo-article.css';
@@ -149,33 +152,45 @@ export default function DemoArticle() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <a className={styles.brand} href={browser.runtime.getURL('/feed.html?demo=1')}>
+        <BaseLink
+          external={false}
+          className={styles.brand}
+          href={browser.runtime.getURL('/feed.html?demo=1')}
+        >
           <span className={styles.brandMark} aria-hidden="true">
             ◌
           </span>
           <span>FIELD NOTES</span>
-        </a>
+        </BaseLink>
         <nav
           className={styles.nav}
           aria-label={language === 'ja' ? 'メインナビゲーション' : 'Main navigation'}
         >
-          <a href={browser.runtime.getURL('/feed.html?demo=1')}>{copy.home}</a>
+          <BaseLink external={false} href={browser.runtime.getURL('/feed.html?demo=1')}>
+            {copy.home}
+          </BaseLink>
           <span>{copy.journal}</span>
-          <a href={languageUrl.href}>{copy.language}</a>
+          <BaseLink external={false} href={languageUrl.href}>
+            {copy.language}
+          </BaseLink>
         </nav>
       </header>
 
       <main className={styles.articlePage}>
         <div className={styles.breadcrumb}>
-          <a href={browser.runtime.getURL('/feed.html?demo=1')}>{copy.home}</a>
+          <BaseLink external={false} href={browser.runtime.getURL('/feed.html?demo=1')}>
+            {copy.home}
+          </BaseLink>
           <span aria-hidden="true">/</span>
           <span>{article.feedTitle}</span>
         </div>
         <article>
           <header className={styles.articleHeader}>
-            <p className={styles.category}>{article.feedTitle}</p>
-            <h1 className={styles.title}>{article.title}</h1>
-            <p className={styles.lead}>{article.description || copy.read}</p>
+            <BaseText className={styles.category}>{article.feedTitle}</BaseText>
+            <BaseHeading hLv="1" className={styles.title}>
+              {article.title}
+            </BaseHeading>
+            <BaseText className={styles.lead}>{article.description || copy.read}</BaseText>
             <div className={styles.byline}>
               <span className={styles.avatar} aria-hidden="true">
                 F
@@ -196,13 +211,13 @@ export default function DemoArticle() {
           )}
 
           <div className={styles.story}>
-            <p className={styles.intro}>{copy.read}</p>
-            <p>{copy.reflection}</p>
+            <BaseText className={styles.intro}>{copy.read}</BaseText>
+            <BaseText>{copy.reflection}</BaseText>
             <aside className={styles.note}>
               <span className={styles.noteLabel}>{copy.note}</span>
-              <p>{copy.noteText}</p>
+              <BaseText>{copy.noteText}</BaseText>
             </aside>
-            <p>{copy.footer}</p>
+            <BaseText>{copy.footer}</BaseText>
           </div>
         </article>
       </main>

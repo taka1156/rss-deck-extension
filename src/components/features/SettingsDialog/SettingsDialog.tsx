@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { BaseButton } from '@/components/shared/BaseButton/BaseButton';
 import { BaseDialog } from '@/components/shared/BaseDialog/BaseDialog';
 import { BaseInput } from '@/components/shared/BaseInput/BaseInput';
+import { BaseLabel } from '@/components/shared/BaseLabel/BaseLabel';
 import {
   type DashboardState,
   loadDashboardState,
@@ -169,7 +170,7 @@ export function SettingsDialog({
       <BaseButton id="exportSettings" type="button" onClick={() => void handleExport()}>
         {t('settings.export')}
       </BaseButton>
-      <label className={importSettings} htmlFor="importSettings">
+      <BaseLabel className={importSettings} htmlFor="importSettings">
         {t('settings.import')}
         <BaseInput
           id="importSettings"
@@ -179,7 +180,7 @@ export function SettingsDialog({
             void handleImport(event);
           }}
         />
-      </label>
+      </BaseLabel>
     </BaseDialog>
   );
 }

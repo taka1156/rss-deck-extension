@@ -8,9 +8,6 @@ export const main = style({
 });
 
 export const groups = style({
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'flex-start',
@@ -18,9 +15,6 @@ export const groups = style({
 });
 
 export const grid = style({
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
   gap: '16px',
