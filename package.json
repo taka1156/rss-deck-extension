@@ -13,8 +13,9 @@
     "compile": "tsc --noEmit",
     "test": "vitest run",
     "dev": "wxt",
-    "build": "wxt build",
-    "zip": "wxt zip"
+    "build": "wxt build --mode preview",
+    "zip": "wxt zip",
+    "zip:preview": "wxt zip --mode preview"
   },
   "dependencies": {
     "@vanilla-extract/css": "^1.21.2",

@@ -24,6 +24,13 @@ describe('DashboardHeader', () => {
     expect(screen.getByText('DEMO')).toBeInTheDocument();
   });
 
+  it('shows the PREVIEW badge in preview mode', () => {
+    vi.stubEnv('MODE', 'preview');
+    render(<DashboardHeader {...defaultProps} />);
+    expect(screen.getByText('PREVIEW')).toBeInTheDocument();
+    vi.unstubAllEnvs();
+  });
+
   it('opens demo mode after exactly ten logo clicks', async () => {
     const onDemoMode = vi.fn();
     render(<DashboardHeader {...defaultProps} onDemoMode={onDemoMode} />);

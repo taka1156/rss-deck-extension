@@ -5,15 +5,26 @@ import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  manifest: {
-    permissions: ['storage', 'alarms', 'declarativeNetRequest'],
-    optional_host_permissions: ['http://*/*', 'https://*/*'],
-    action: {
-      default_title: 'RSS Decks を開く',
-    },
-    name: 'RSS Decks',
-    version: '1.0.1',
-    description: '複数のRSS/Atomフィードをブロック形式で一覧表示します',
+  manifest: ({ mode }) => {
+    const isPreview = mode === 'preview';
+    const dir = isPreview ? 'preview' : 'production';
+
+    return {
+      name: `RSS Decks ${mode === 'production' ? '' : '[Preview]'}`,
+      version: '1.0.1',
+      description: '複数のRSS/Atomフィードをブロック形式で一覧表示します',
+      permissions: ['storage', 'alarms', 'declarativeNetRequest'],
+      optional_host_permissions: ['http://*/*', 'https://*/*'],
+      action: {
+        default_title: 'RSS Decks を開く',
+      },
+      icons: {
+        16: `icon/${dir}/16.png`,
+        32: `icon/${dir}/32.png`,
+        48: `icon/${dir}/48.png`,
+        128: `icon/${dir}/128.png`,
+      },
+    };
   },
   srcDir: 'src',
   publicDir: 'src/public',
